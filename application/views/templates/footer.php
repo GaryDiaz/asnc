@@ -52,7 +52,7 @@
 <script src="<?=base_url()?>Plantilla/admin/assets/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="<?=base_url()?>Plantilla/admin/assets/plugins/sweetalert/jquery.sweet-alert.custom.js"></script>
 
-<script src="<?=base_url()?>Plantilla/js/asnc.app.js?<?=time()?>"></script>
+<script src="<?=base_url()?>/js/asnc.app.js?<?=time()?>"></script>
 
 
 <script>
