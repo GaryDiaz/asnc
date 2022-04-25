@@ -1,0 +1,31 @@
+
+ESTA ES LA QUE SE CREA EN SNCENLINEA
+CREATE VIEW public.infcontratista AS
+SELECT 
+  contratistas.id, 
+  edocontratistas.infoadic, 
+  contratistas.rifced, 
+  contratistas.nombre, 
+  dencomerciales.descdencom, 
+  objcontratistas.descobjcont, 
+  contratistas.dirfiscal, 
+  contratistas.telf1, 
+  contratistas.percontacto, 
+  contratistas.fecactsusc_at, 
+  contratistas.fecvencsusc_at,  
+  contratistas.numcertrnc, 
+  contratistas.numcontrol_certrnc, 
+  contratistas.fecinscrnc_at, 
+  contratistas.fecvencrnc_at, 
+  edocontratistas.descedocont, 
+  edocontratistas.id as idedocontratistas, 
+  contratistas.tipopersona
+FROM 
+  public.contratistas, 
+  public.dencomerciales, 
+  public.edocontratistas, 
+  public.objcontratistas
+WHERE 
+  contratistas.edocontratista_id = edocontratistas.id AND
+  contratistas.dencomerciale_id = dencomerciales.id AND
+  contratistas.objcontratista_id = objcontratistas.id;
