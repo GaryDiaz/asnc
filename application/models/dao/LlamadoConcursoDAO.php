@@ -6,6 +6,9 @@
  * @author Gary Diaz <garyking1982@gmail.com>
  */
 class LlamadoConcursoDAO extends \CI_Model {
+  public function buscar($rif, $numeroProceso) {
+  }
+
   public function calcularLapsos($fechaLlamado, int $diasHabiles, array $feriados) {
     $fechaDisponibleLlamado = null;
     $fechaFinAclaratoria = null;
