@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 $route['default_controller'] = 'login';
 $route['404_override'] = '';
@@ -37,8 +37,7 @@ $route['frmLapso'] = 'Formulario/lapso';
 //***                    Rutas para Llamados a Concurso                      ***
 //******************************************************************************
 $route['apirest/calcularLapsos/(:any)/(:any)/(:num)/(:num)/(:num)']['get'] = 'LlamadoConcursoRest/calcular_lapsos/$1/$2/$3/$4/$5';
-
-
+$route['apirest/recalcularLapsos/(:any)/(:any)/(:any)']['get'] = 'LlamadoConcursoRest/recalcular_lapsos/$1/$2/$3';
 
 //******************************************************************************
 //***                      RUTAS PARA LAS DIRECCIONES                        ***
@@ -138,4 +137,3 @@ $route['apirest/feriadoMunicipal']['post'] = 'FeriadoRest/feriado_municipal';   
 $route['apirest/feriadoMunicipal']['put'] = 'FeriadoRest/feriado_municipal';                                //Editar
 $route['apirest/feriadoMunicipal/(:num)/(:num)/(:num)']['delete'] = 'FeriadoRest/feriado_municipal/$1/$2/$3';//Eliminar PK (id_municipio, mes y dia)
 //******************************************************************************
-
