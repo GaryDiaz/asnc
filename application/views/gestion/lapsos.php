@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Gary Diaz <garyking1982@gmail.com>
  */
@@ -12,7 +13,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" id="modalidades-tab" data-toggle="tab" href="#modalidades" role="tab" aria-controls="modalidades" aria-selected="false"><i class="ion-ios-location"></i> Modalidades</a>
-        
+
         <li class="nav-item">
             <a class="nav-link" id="mecanismos-tab" data-toggle="tab" href="#mecanismos" role="tab" aria-controls="mecanismos" aria-selected="false"><i class="ion-gear-b"></i> Mecanismos</a>
         </li>
@@ -27,7 +28,7 @@
                     <button type="button" class="btn btn-primary" id="btnFrmLapsoModal" data-toggle="modal" data-target="#sncModalDlg"><i class="ion-plus"></i> Añadir</button>
                 </div>
                 <div class="input-group">
-                    <button type="button" class="btn btn-secondary" id="btnListarLapsos" ><i class="ion-ios-list"></i> Mostrar Todos</button>
+                    <button type="button" class="btn btn-secondary" id="btnListarLapsos"><i class="ion-ios-list"></i> Mostrar Todos</button>
                 </div>
             </div>
             <div id="list-lapsos">Lista de Lapsos</div>
@@ -38,7 +39,7 @@
                     <button type="button" class="btn btn-primary" id="btnFrmModalidadModal" data-toggle="modal" data-target="#sncModalDlg"><i class="ion-plus"></i> Añadir</button>
                 </div>
                 <div class="input-group">
-                    <button type="button" class="btn btn-secondary" id="btnListarModalidades" ><i class="ion-ios-list"></i> Mostrar Todas</button>
+                    <button type="button" class="btn btn-secondary" id="btnListarModalidades"><i class="ion-ios-list"></i> Mostrar Todas</button>
                 </div>
             </div>
             <div id="list-modalidades">Lista de Modalidades</div>
@@ -49,7 +50,7 @@
                     <button type="button" class="btn btn-primary" id="btnFrmMecanismoModal" data-toggle="modal" data-target="#sncModalDlg"><i class="ion-plus"></i> Añadir</button>
                 </div>
                 <div class="input-group">
-                    <button type="button" class="btn btn-secondary" id="btnListarMecanismos" ><i class="ion-ios-list"></i> Mostrar Todos</button>
+                    <button type="button" class="btn btn-secondary" id="btnListarMecanismos"><i class="ion-ios-list"></i> Mostrar Todos</button>
                 </div>
 
             </div>
@@ -61,50 +62,49 @@
                     <button type="button" class="btn btn-primary" id="btnFrmObjetoContModal" data-toggle="modal" data-target="#sncModalDlg"><i class="ion-plus"></i> Añadir</button>
                 </div>
                 <div class="input-group">
-                    <button type="button" class="btn btn-secondary" id="btnListarObjetosCont" ><i class="ion-ios-list"></i> Mostrar Todos</button>
+                    <button type="button" class="btn btn-secondary" id="btnListarObjetosCont"><i class="ion-ios-list"></i> Mostrar Todos</button>
                 </div>
             </div>
             <div id="list-objetos-cont">Lista de Objetos de Contratación</div>
         </div>
     </div>
     <script>
-        $('#btnListarLapsos').click(function () {
+        $('#btnListarLapsos').click(function() {
             Lapso.listar();
         });
-        $('#btnListarModalidades').click(function () {
+        $('#btnListarModalidades').click(function() {
             Modalidad.listar();
         });
-        $('#btnListarMecanismos').click(function () {
+        $('#btnListarMecanismos').click(function() {
             Mecanismo.listar();
         });
-        $('#btnListarObjetosCont').click(function () {
+        $('#btnListarObjetosCont').click(function() {
             ObjetoContratacion.listar();
         });
 
-        $("#btnFrmLapsoModal").click(function () {
+        $("#btnFrmLapsoModal").click(function() {
             Lapso.form();
         });
-        $("#btnFrmModalidadModal").click(function () {
+        $("#btnFrmModalidadModal").click(function() {
             Modalidad.form();
         });
-        $("#btnFrmMecanismoModal").click(function () {
+        $("#btnFrmMecanismoModal").click(function() {
             Mecanismo.form();
         });
-        $("#btnFrmObjetoContModal").click(function () {
+        $("#btnFrmObjetoContModal").click(function() {
             ObjetoContratacion.form();
         });
 
-        $(function () {
+        $(function() {
             $('#tabGestionActividades li:first-child a').tab('show');
         });
     </script>
-    
+
     <style>
-        #tabGestionActividades li a.active{
+        #tabGestionActividades li a.active {
             background-color: #037BFF;
             color: white;
             font-weight: bold;
         }
     </style>
 </div>
-

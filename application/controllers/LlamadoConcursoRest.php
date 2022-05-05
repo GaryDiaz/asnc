@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Gary Diaz <garyking1982@gmail.com>
  */
@@ -6,50 +7,51 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 use ASNC\Libraries\RestController;
 use Application\Model\Mensaje;
+
 require_once APPPATH . "/libraries/RestController.php";
 require_once APPPATH . "/libraries/Format.php";
 require_once APPPATH . "/models/Mensaje.php";
 
 /**
  * LlamadoConcursoRest
- *
+ * &&
  * @author Gary Díaz
  */
 class LlamadoConcursoRest extends RestController {
     public function calcular_lapsos_get(string $rif, $fechaLlamado, int $idModalidad, int $idMecanismo, int $idOC) {
         try {
-            $oe=$this->buscarOrganoEntePorRif($rif);
-            $lapso= $this->buscarLapso($idModalidad, $idMecanismo, $idOC);
-            $feriados= $this->buscarFeriadosCercanos($oe->id_estado, $oe->id_municipio, $fechaLlamado);
+            $oe = $this->buscarOrganoEntePorRif($rif);
+            $lapso = $this->buscarLapso($idModalidad, $idMecanismo, $idOC);
+            $feriados = $this->buscarFeriadosCercanos($oe->id_estado, $oe->id_municipio, $fechaLlamado);
             //$x= array('organoente'=>$oe, 'lapso'=>$lapso, 'feriados'=>$feriados);
             $this->load->model('dao/LlamadoConcursoDAO');
-            $fechasLapsos=$this->LlamadoConcursoDAO->calcularLapsos($fechaLlamado, $lapso->dias_habiles, $feriados);
-            if ($fechasLapsos){
-                $data=new Mensaje("Fecha calculadas según los parámetros");
+            $fechasLapsos = $this->LlamadoConcursoDAO->calcularLapsos($fechaLlamado, $lapso->dias_habiles, $feriados);
+            if ($fechasLapsos) {
+                $data = new Mensaje("Fecha calculadas según los parámetros");
                 $data->setDatos($fechasLapsos, 'Fechas Lapsos');
                 $this->response($data, self::HTTP_OK);
-            }else{
+            } else {
                 $this->response(new Mensaje("No se pudieron calcular las fechas"), self::HTTP_BAD_REQUEST);
             }
         } catch (Exception $exc) {
             $this->response(new Mensaje($exc->getMessage()), RestController::HTTP_BAD_REQUEST);
-        }        
+        }
     }
-    
+
     private function buscarOrganoEntePorRif($rif) {
         try {
             $this->load->model('dao/OrganoDAO');
-            $oe=$this->OrganoDAO->buscarPorRif($rif);
+            $oe = $this->OrganoDAO->buscarPorRif($rif);
             if ($oe) {
                 return $oe;
-            }else{
-                throw new Exception("No encontro un Órgano-Ente con RIF: ".$rif);
+            } else {
+                throw new Exception("No encontro un Órgano-Ente con RIF: " . $rif);
             }
         } catch (Exception $exc) {
             throw $exc;
         }
     }
-    
+
     private function buscarLapso(int $idModalidad, int $idMecanismo, int $idOC) {
         try {
             $this->load->model('dao/LapsoDAO');
@@ -63,7 +65,7 @@ class LlamadoConcursoRest extends RestController {
             throw $exc;
         }
     }
-    
+
     private function buscarFeriadosCercanos(int $idEstado, int $idMunicipio, $strfecha) {
         try {
             $fecha = $this->convertirStringDate($strfecha);
@@ -88,11 +90,11 @@ class LlamadoConcursoRest extends RestController {
     //**************************************************************************
     //***                        Funciones Internas                          *** 
     //**************************************************************************
-    private function convertirStringDate(string $strfecha, string $formato="Y-m-d") {
+    private function convertirStringDate(string $strfecha, string $formato = "Y-m-d") {
         $dt = DateTime::createFromFormat($formato, $strfecha);
-        if (date_format($dt, $formato) == $strfecha){
+        if (date_format($dt, $formato) == $strfecha) {
             return $dt;
-        }else{
+        } else {
             throw new Exception('Debe introducir una fecha válida en formato (aaaa-mm-dd)');
         }
     }

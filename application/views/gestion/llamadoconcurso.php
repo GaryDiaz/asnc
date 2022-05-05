@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Gary Diaz <garyking1982@gmail.com>
  */
@@ -62,19 +63,19 @@
                         <div class="form-group col-lg-3 col-md-3 col-sm-6">
                             <label for="sltModalidad">Modalidad</label>
                             <select id="sltModalidad" class="form-control">
-                                <option >Modalidad</option>
+                                <option>Modalidad</option>
                             </select>
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-6">
                             <label for="sltMecanismo">Mecanismo</label>
                             <select id="sltMecanismo" class="form-control">
-                                <option >Mecanismo</option>
+                                <option>Mecanismo</option>
                             </select>
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-6">
                             <label for="sltObjetoContratacion">Objeto de Contratacion</label>
                             <select id="sltObjetoContratacion" class="form-control">
-                                <option >Objeto de Contratacion</option>
+                                <option>Objeto de Contratacion</option>
                             </select>
                         </div>
                         <div class="form-group col-lg-3 col-md-3 col-sm-6">
@@ -85,8 +86,7 @@
                     <div class="row">
                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="txtFechaDisponibleLlamado">Fecha de Disponibilidad del Llamado</label>
-                            <input type="date" class="form-control" id="txtFechaDisponibleLlamado">
-                            <small id="errFechaDisponibleLlamado" class="form-text text-muted text-red-darker" hidden>Error</small>
+                            <input type="date" class="form-control" id="txtFechaDisponibleLlamado" disabled>
                         </div>
                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="txtFechaFin">Fecha Fin</label>
@@ -118,13 +118,13 @@
                         <div class="form-group col-lg-3 col-md-6 col-sm-12">
                             <label for="sltEstado">Estado</label>
                             <select id="sltEstado" class="form-control">
-                                <option >Estado</option>
+                                <option>Estado</option>
                             </select>
                         </div>
                         <div class="form-group col-lg-3 col-md-6 col-sm-12">
                             <label for="sltMunicipio">Municipio</label>
                             <select id="sltMunicipio" class="form-control">
-                                <option >Municipio</option>
+                                <option>Municipio</option>
                             </select>
                         </div>
                     </div>
@@ -143,20 +143,55 @@
                             <input type="date" class="form-control" id="txtFechaInicioAclaratoria" disabled>
                         </div>
                         <div class="form-group col-lg-4 col-md-4 col-sm-12">
-                            <label for="txtFechaTope">Fecha Tope</label>
-                            <input type="date" class="form-control" id="txtFechaTope">
-                            <small id="errFechaTope" class="form-text text-muted text-red-darker" hidden>Error</small>
+                            <label for="txtFechaFinAclaratoria">Fecha Fin de Aclaratoria</label>
+                            <input type="date" class="form-control" id="txtFechaFinAclaratoria" disabled>
                         </div>
                         <div class="form-group col-lg-4 col-md-4 col-sm-12">
-                            <label for="txtFechaFinAclaratoria">Fecha Fin de Aclaratoria</label>
-                            <input type="date" class="form-control" id="txtFechaFinAclaratoria">
-                            <small id="errFechaFinAclaratoria" class="form-text text-muted text-red-darker" hidden>Error</small>
+                            <label for="txtFechaTope">Fecha Tope</label>
+                            <input type="date" class="form-control" id="txtFechaTope" disabled>
                         </div>
                     </div>
                 </fieldset>
-                <br/>
+                <fieldset class="border border-success p-10 shadow-lg">
+                    <legend class="font-weight-bold">Apertura de Sobres</legend>
+                    <div class="row">
+                        <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                            <label for="txtFechaEntrega">Fecha de Entrega</label>
+                            <input type="date" class="form-control" id="txtFechaEntrega" disabled>
+                        </div>
+                        <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                            <label for="txtHoraEntrega">Hora Desde</label>
+                            <input type="time" class="form-control" id="txtHoraEntrega">
+                        </div>
+                        <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                            <label for="sltEstadoSobre">Estado</label>
+                            <select id="sltEstadoSobre" class="form-control">
+                                <option>Estado</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3 col-md-6 col-sm-12">
+                            <label for="sltMunicipioSobre">Municipio</label>
+                            <select id="sltMunicipioSobre" class="form-control">
+                                <option>Municipio</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                            <label for="txtDireccionSobre">Dirección</label>
+                            <input type="text" class="form-control" id="txtDireccionSobre" placeholder="Dirección" maxlength="250">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                            <label for="txtLugarEntrega">Lugar Entrega</label>
+                            <input type="text" class="form-control" id="txtLugarEntrega" placeholder="Lugar de Entrega" maxlength="250">
+                        </div>
+                    </div>
+                </fieldset>
+                <br />
                 <div class="footer ">
-                    <button type="button" class="btn btn-primary btn-lg float-right" id="btnGuardar" ><i class="ion-compose"></i> Guardar Cambios</button>
+                    <button type="button" class="btn btn-primary btn-lg float-right" id="btnGuardar"><i class="ion-compose"></i> Guardar Cambios</button>
                 </div>
             </form>
         </div>
@@ -164,13 +199,14 @@
 </div>
 
 <style>
-    fieldset>legend{
+    fieldset>legend {
         font-size: 12pt;
         margin-left: 8px;
     }
-    
-    fieldset{
+
+    fieldset {
         margin-bottom: 5px;
         margin-top: 5px;
+        border-radius: 12px;
     }
 </style>
