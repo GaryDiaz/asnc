@@ -342,6 +342,13 @@ var sncApp = {
 		$("#txtLugarEntrega").change(function () {
 			LlamadoConcurso.cambioLugarEntrega();
 		});
+		$("#btnGuardar").click(function () {
+			if (LlamadoConcurso.validarDatos()) {
+				alert("El formulario fue validado correctamente");
+			} else {
+				alert("Hay que revisar algunos datos");
+			}
+		});
 	},
 	notificarError: function (error) {
 		let json = JSON.parse(error.responseText);
@@ -2787,13 +2794,91 @@ var LlamadoConcurso = {
 	},
 	validarDatos: function () {
 		let ok = true;
-		if ((llamadoConcursoFrm.numero_proceso = 0)) {
-			$("#errNumeroProceso").val("Debe espepecificar el número de proceso");
+		if (llamadoConcursoFrm.numero_proceso === "") {
+			$("#errNumeroProceso").html("Debe espepecificar el número de proceso");
 			ok = false;
 		}
-		if ((llamadoConcursoFrm.id_modalidad = 0)) {
-			$("errModalid");
+		if (llamadoConcursoFrm.fecha_llamado === "") {
+			$("#errFechaLlamado").html("Debe espepecificar la fecha de llamado");
+			ok = false;
 		}
+		if (llamadoConcursoFrm.denominacion_proceso === "") {
+			$("#errDenominacionProceso").html(
+				"Debe espepecificar la denominación del proceso"
+			);
+			ok = false;
+		}
+		if (llamadoConcursoFrm.descripcion_contratacion === "") {
+			$("#errDescripcionContratacion").html(
+				"Debe espepecificar la descripción de contratación"
+			);
+			ok = false;
+		}
+		if (llamadoConcursoFrm.id_modalidad === "") {
+			$("#errModalidad").html("Debe escoger la modalidad");
+			ok = false;
+		}
+		if (llamadoConcursoFrm.id_mecanismo === "") {
+			$("#errMecanismo").html("Debe escoger el mecanismo");
+			ok = false;
+		}
+		if (llamadoConcursoFrm.id_objeto_contratacion === "") {
+			$("#errObjetoContratacion").html(
+				"Debe escoger el objeto de contratación"
+			);
+			ok = false;
+		}
+		if (llamadoConcursoFrm.hora_desde === "") {
+			$("#errHoraDesde").html("Debe escoger una hora desde...");
+			ok = false;
+		}
+		if (llamadoConcursoFrm.hora_hasta === "") {
+			$("#errHoraHasta").html("Debe escoger una hora hasta...");
+			ok = false;
+		}
+		if (llamadoConcursoFrm.id_estado === "") {
+			$("#errEstado").html("Debe escoger un Estado");
+			ok = false;
+		}
+		if (llamadoConcursoFrm.id_municipio === "") {
+			$("#errMunicipio").html("Debe escoger un Municipio");
+			ok = false;
+		}
+		if (llamadoConcursoFrm.direccion === "") {
+			$("#errDireccion").html("Debe ingresar la dirección");
+			ok = false;
+		}
+		if (llamadoConcursoFrm.hora_desde_sobre === "") {
+			$("#errHoraDesdeSobre").html(
+				"Debe ingresar horas desde para la apertura de sobres"
+			);
+			ok = false;
+		}
+		if (llamadoConcursoFrm.id_estado_sobre === "") {
+			$("#errEstadoSobre").html(
+				"Debe escoger el Estado para la apertura de sobres"
+			);
+			ok = false;
+		}
+		if (llamadoConcursoFrm.id_municipio_sobre === "") {
+			$("#errMunicipioSobre").html(
+				"Debe escoger el Municipio para la apertura de sobres"
+			);
+			ok = false;
+		}
+		if (llamadoConcursoFrm.direccion_sobre === "") {
+			$("#errDireccionSobre").html(
+				"Debe ingresar la dirección para la apertura de sobres"
+			);
+			ok = false;
+		}
+		if (llamadoConcursoFrm.lugar_entrega === "") {
+			$("#errLugarEntrega").html(
+				"Debe ingresar el lugar de entrega de los sobres"
+			);
+			ok = false;
+		}
+
 		return ok;
 	},
 };

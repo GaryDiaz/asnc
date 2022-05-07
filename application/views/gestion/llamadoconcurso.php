@@ -76,7 +76,7 @@
               <select id="sltMecanismo" class="form-control">
                 <option>Mecanismo</option>
               </select>
-              <small id="errNumeroMecanismo" class="form-text text-muted text-red-darker"></small>
+              <small id="errMecanismo" class="form-text text-muted text-red-darker"></small>
             </div>
             <div class="form-group col-lg-3 col-md-3 col-sm-6">
               <label for="sltObjetoContratacion">Objeto de Contratacion</label>
@@ -172,9 +172,9 @@
               <input type="date" class="form-control" id="txtFechaEntrega" disabled>
             </div>
             <div class="form-group col-lg-3 col-md-6 col-sm-12">
-              <label for="txtHoraEntrega">Hora Desde</label>
-              <input type="time" class="form-control" id="txtHoraEntrega" require>
-              <small id="errHoraEntrega" class="form-text text-muted text-red-darker"></small>
+              <label for="txtHoraDesdeSobre">Hora Desde</label>
+              <input type="time" class="form-control" id="txtHoraDesdeSobre" require>
+              <small id="errHoraDesdeSobre" class="form-text text-muted text-red-darker"></small>
             </div>
             <div class="form-group col-lg-3 col-md-6 col-sm-12">
               <label for="sltEstadoSobre">Estado</label>
