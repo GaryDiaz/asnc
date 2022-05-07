@@ -16,7 +16,7 @@ require_once APPPATH . "/models/Mensaje.php";
  *
  * Es un controlador que se encarga de servir todas peticiones CRUD relacionadas
  * con los Feriados Nacionales, Estadales, Municipales y de Fechas Específicas
- * 
+ *
  * @author Gary Díaz
  */
 
@@ -185,8 +185,6 @@ class FeriadoRest extends RestController {
       $this->response(new Mensaje($exc->getMessage()), RestController::HTTP_BAD_REQUEST);
     }
   }
-
-
 
   //**************************************************************************
   //***            Solicitudes Rest de Feriados Nacionales                 ***

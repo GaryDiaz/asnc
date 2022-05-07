@@ -34,7 +34,34 @@ var lapsoFrm = {
 	dias_habiles: 0,
 };
 var organoEnteFrm;
-var llamadoConcursoFrm;
+var llamadoConcursoFrm = {
+	rif_organoente: "",
+	numero_proceso: "",
+	id_modalidad: "",
+	id_mecanismo: "",
+	id_objeto_contratacion: "",
+	dias_habiles: "",
+	fecha_llamado: "",
+	fecha_disponible_llamado: "",
+	fecha_fin_aclaratoria: "",
+	fecha_tope: "",
+	fecha_fin_llamado: "",
+	denominacion_proceso: "",
+	descripcion_contratacion: "",
+	web_contratante: "",
+	hora_desde: "",
+	hora_hasta: "",
+	id_estado: "",
+	id_municipio: "",
+	direccion: "",
+	hora_desde_sobre: "",
+	id_estado_sobre: "",
+	id_municipio_sobre: "",
+	direccion_sobre: "",
+	lugar_entrega: "",
+	observaciones: "",
+	estatus: "",
+};
 var dataLapsos = {
 	rif: "",
 	fechallamado: "",
@@ -187,9 +214,10 @@ var sncApp = {
 			success: function (json) {
 				$("#txtRif").val(json.dato.rif);
 				dataLapsos.rif = json.dato.rif;
+				llamadoConcursoFrm.rif_organoente = json.dato.rif;
 				$("#txtSiglas").val(json.dato.siglas);
 				$("#txtDescripcion").val(json.dato.descripcion);
-				$("#txtDireccion").val(
+				$("#txtDireccionOE").val(
 					json.dato.direccion +
 						", Municipio " +
 						json.dato.municipio +
@@ -252,7 +280,20 @@ var sncApp = {
 						"<option value=" + estado.id + ">" + estado.descedo + "</option>\n";
 				});
 				$("#sltEstado").html(salida);
+				$("#sltEstadoSobre").html(salida);
 			},
+		});
+		$("#txtNumeroProceso").change(function () {
+			LlamadoConcurso.cambioNumeroProceso();
+		});
+		$("#txtFechaLlamado").change(function () {
+			LlamadoConcurso.cambioTxtFechaLlamado();
+		});
+		$("#txtDenominacionProceso").change(function () {
+			LlamadoConcurso.cambioDenominacionProceso();
+		});
+		$("#txtDescripcionContratacion").change(function () {
+			LlamadoConcurso.cambioDescripcionContratacion();
 		});
 		$("#sltModalidad").change(function () {
 			LlamadoConcurso.cambioSltModalidad();
@@ -263,37 +304,43 @@ var sncApp = {
 		$("#sltObjetoContratacion").change(function () {
 			LlamadoConcurso.cambioSltObjetoContratacion();
 		});
-		$("#sltEstado").change(function () {
-			$.ajax({
-				url: "apirest/municipios/" + $("#sltEstado").val(),
-				success: function (json) {
-					let salida = "<option>[Municipio]</option>\n";
-					$.each(json.datos, function (i, municipio) {
-						salida +=
-							"<option value=" +
-							municipio.id +
-							">" +
-							municipio.descmun +
-							"</option>\n";
-					});
-					$("#sltMunicipio").html(salida);
-				},
-			});
-		});
-		$("#txtFechaLlamado").change(function () {
-			LlamadoConcurso.cambioTxtFechaLlamado();
-		});
-		$("#txtFechaDisponibleLlamado").change(function () {
-			LlamadoConcurso.cambioTxtFechaDisponibleLlamado();
-		});
-		$("#txtFechaFinAclaratoria").change(function () {
-			LlamadoConcurso.cambioTxtFechaFinAclaratoria();
-		});
-		$("#txtFechaTope").change(function () {
-			LlamadoConcurso.cambioTxtFechaTope();
-		});
 		$("#txtFechaFin").change(function () {
 			LlamadoConcurso.cambioTxtFechaFin();
+		});
+		$("#txtWebContratante").change(function () {
+			LlamadoConcurso.cambioWebContratante();
+		});
+		$("#txtHoraDesde").change(function () {
+			LlamadoConcurso.cambioHoraDesde();
+		});
+		$("#txtHoraHasta").change(function () {
+			console.log("la hora hasta ha cambiado");
+			LlamadoConcurso.cambioHoraHasta();
+		});
+		$("#sltEstado").change(function () {
+			LlamadoConcurso.cambioEstado();
+		});
+		$("#sltMunicipio").change(function () {
+			LlamadoConcurso.cambioMunicipio();
+		});
+		$("#txtDireccion").change(function () {
+			console.log("la direccion cambio");
+			LlamadoConcurso.cambioDireccion();
+		});
+		$("#txtHoraDesdeSobre").change(function () {
+			LlamadoConcurso.cambioHoraDesdeSobre();
+		});
+		$("#sltEstadoSobre").change(function () {
+			LlamadoConcurso.cambioEstadoSobre();
+		});
+		$("#sltMunicipioSobre").change(function () {
+			LlamadoConcurso.cambioMunicipioSobre();
+		});
+		$("#txtDireccionSobre").change(function () {
+			LlamadoConcurso.cambioDireccionSobre();
+		});
+		$("#txtLugarEntrega").change(function () {
+			LlamadoConcurso.cambioLugarEntrega();
 		});
 	},
 	notificarError: function (error) {
@@ -2560,51 +2607,36 @@ var OrganoEnte = {
 };
 
 var LlamadoConcurso = {
+	cambioNumeroProceso: function () {
+		llamadoConcursoFrm.numero_proceso = $("#txtNumeroProceso").val();
+	},
 	cambioSltModalidad: function () {
-		dataLapsos.id_modalidad = $("#sltModalidad").val();
+		let id = $("#sltModalidad").val();
+		dataLapsos.id_modalidad = id;
+		llamadoConcursoFrm.id_modalidad = id;
 		LlamadoConcurso.calcularLapsos();
 	},
 	cambioSltMecanismo: function () {
-		dataLapsos.id_mecanismo = $("#sltMecanismo").val();
+		let id = $("#sltMecanismo").val();
+		dataLapsos.id_mecanismo = id;
+		llamadoConcursoFrm.id_mecanismo = id;
 		LlamadoConcurso.calcularLapsos();
 	},
 	cambioSltObjetoContratacion: function () {
-		dataLapsos.id_objeto_contratacion = $("#sltObjetoContratacion").val();
+		let id = $("#sltObjetoContratacion").val();
+		dataLapsos.id_objeto_contratacion = id;
+		llamadoConcursoFrm.id_objeto_contratacion = id;
 		LlamadoConcurso.calcularLapsos();
 	},
 	cambioTxtFechaLlamado: function () {
-		dataLapsos.fechallamado = $("#txtFechaLlamado").val();
+		let fecha = $("#txtFechaLlamado").val();
+		dataLapsos.fechallamado = fecha;
+		llamadoConcursoFrm.fecha_llamado = fecha;
 		LlamadoConcurso.calcularLapsos();
 	},
-	cambioTxtFechaDisponibleLlamado: function () {
-		let fchNueva = new Date($("#txtFechaDisponibleLlamado").val());
-		let fchLapso = new Date(lapsosFechas.fecha_disponible_llamado);
-		if (fchNueva.getTime() < fchLapso.getTime()) {
-			$("#errFechaDisponibleLlamado").prop("hidden", false);
-		} else {
-			$("#errFechaDisponibleLlamado").prop("hidden", true);
-		}
-	},
-	cambioTxtFechaFinAclaratoria: function () {
-		let fchNueva = new Date($("#txtFechaFinAclaratoria").val());
-		let fchLapso = new Date(lapsosFechas.fecha_fin_aclaratoria);
-		if (fchNueva.getTime() < fchLapso.getTime()) {
-			$("#errFechaFinAclaratoria").prop("hidden", false);
-		} else {
-			$("#errFechaFinAclaratoria").prop("hidden", true);
-		}
-	},
-	cambioTxtFechaTope: function () {
-		let fchNueva = new Date($("#txtFechaTope").val());
-		let fchLapso = new Date(lapsosFechas.fecha_tope);
-		if (fchNueva.getTime() < fchLapso.getTime()) {
-			$("#errFechaTope").prop("hidden", false);
-		} else {
-			$("#errFechaTope").prop("hidden", true);
-		}
-	},
 	cambioTxtFechaFin: function () {
-		let fchNueva = new Date($("#txtFechaFin").val());
+		let fechaFin = $("#txtFechaFin").val();
+		let fchNueva = new Date(fechaFin);
 		let fchLapso = new Date(lapsosFechas.fecha_fin_llamado);
 		if (fchNueva.getTime() < fchLapso.getTime()) {
 			$("#errFechaFin").prop("hidden", false);
@@ -2617,17 +2649,94 @@ var LlamadoConcurso = {
 					"/" +
 					dataLapsos.fechallamado +
 					"/" +
-					$("#txtFechaFin").val(),
+					fechaFin,
 				method: "get",
 				success: function (json) {
+					llamadoConcursoFrm.fecha_fin_llamado = fechaFin;
+					llamadoConcursoFrm.dias_habiles = json.datos.dias_habiles;
+					llamadoConcursoFrm.fecha_tope = json.datos.fecha_tope;
 					lapsosFechas.dias_habiles = json.datos.dias_habiles;
 					lapsosFechas.fecha_tope = json.datos.fecha_tope;
 
 					$("#txtFechaTope").val(lapsosFechas.fecha_tope);
 					$("#txtDiasHabiles").val(lapsosFechas.dias_habiles);
+					$("#txtFechaEntrega").val(fechaFin);
 				},
 			});
 		}
+	},
+	cambioDenominacionProceso: function () {
+		llamadoConcursoFrm.denominacion_proceso = $(
+			"#txtDenominacionProceso"
+		).val();
+	},
+	cambioDescripcionContratacion: function () {
+		llamadoConcursoFrm.descripcion_contratacion = $(
+			"#txtDescripcionContratacion"
+		).val();
+	},
+	cambioWebContratante: function () {
+		llamadoConcursoFrm.web_contratante = $("#txtWebContratante").val();
+	},
+	cambioHoraDesde: function () {
+		llamadoConcursoFrm.hora_desde = $("#txtHoraDesde").val();
+	},
+	cambioHoraHasta: function () {
+		llamadoConcursoFrm.hora_hasta = $("#txtHoraHasta").val();
+	},
+	cambioEstado: function () {
+		$.ajax({
+			url: "apirest/municipios/" + $("#sltEstado").val(),
+			success: function (json) {
+				let salida = "<option>[Municipio]</option>\n";
+				$.each(json.datos, function (i, municipio) {
+					salida +=
+						"<option value=" +
+						municipio.id +
+						">" +
+						municipio.descmun +
+						"</option>\n";
+				});
+				$("#sltMunicipio").html(salida);
+				llamadoConcursoFrm.id_estado = $("#sltEstado").val();
+			},
+		});
+	},
+	cambioMunicipio: function () {
+		llamadoConcursoFrm.id_municipio = $("#sltMunicipio").val();
+	},
+	cambioDireccion: function () {
+		llamadoConcursoFrm.direccion = $("#txtDireccion").val();
+	},
+	cambioHoraDesdeSobre: function () {
+		llamadoConcursoFrm.hora_desde_sobre = $("#txtHoraDesdeSobre").val();
+	},
+	cambioEstadoSobre: function () {
+		$.ajax({
+			url: "apirest/municipios/" + $("#sltEstadoSobre").val(),
+			success: function (json) {
+				let salida = "<option>[Municipio]</option>\n";
+				$.each(json.datos, function (i, municipio) {
+					salida +=
+						"<option value=" +
+						municipio.id +
+						">" +
+						municipio.descmun +
+						"</option>\n";
+				});
+				$("#sltMunicipioSobre").html(salida);
+				llamadoConcursoFrm.id_estado_sobre = $("#sltEstadoSobre").val();
+			},
+		});
+	},
+	cambioMunicipioSobre: function () {
+		llamadoConcursoFrm.id_municipio_sobre = $("#sltMunicipioSobre").val();
+	},
+	cambioDireccionSobre: function () {
+		llamadoConcursoFrm.direccion_sobre = $("#txtDireccionSobre").val();
+	},
+	cambioLugarEntrega: function () {
+		llamadoConcursoFrm.lugar_entrega = $("#txtLugarEntrega").val();
 	},
 	calcularLapsos: function () {
 		if (
@@ -2651,6 +2760,13 @@ var LlamadoConcurso = {
 				method: "get",
 				success: function (json) {
 					lapsosFechas = json.datos;
+					llamadoConcursoFrm.fecha_disponible_llamado =
+						lapsosFechas.fecha_disponible_llamado;
+					llamadoConcursoFrm.fecha_fin_aclaratoria =
+						lapsosFechas.fecha_fin_aclaratoria;
+					llamadoConcursoFrm.fecha_tope = lapsosFechas.fecha_tope;
+					llamadoConcursoFrm.fecha_fin_llamado = lapsosFechas.fecha_fin_llamado;
+					llamadoConcursoFrm.dias_habiles = lapsosFechas.dias_habiles;
 
 					$("#txtFechaInicioAclaratoria").val(lapsosFechas.fecha_llamado);
 					$("#txtFechaDisponibleLlamado").val(
@@ -2659,18 +2775,8 @@ var LlamadoConcurso = {
 					$("#txtFechaFinAclaratoria").val(lapsosFechas.fecha_fin_aclaratoria);
 					$("#txtFechaTope").val(lapsosFechas.fecha_tope);
 					$("#txtFechaFin").val(lapsosFechas.fecha_fin_llamado);
+					$("#txtFechaEntrega").val(lapsosFechas.fecha_fin_llamado);
 					$("#txtDiasHabiles").val(lapsosFechas.dias_habiles);
-					$("#errFechaDisponibleLlamado").html(
-						"No puede ser menor que: " +
-							formatearFecha(lapsosFechas.fecha_disponible_llamado)
-					);
-					$("#errFechaFinAclaratoria").html(
-						"No puede ser menor que: " +
-							formatearFecha(lapsosFechas.fecha_fin_aclaratoria)
-					);
-					$("#errFechaTope").html(
-						"No puede ser menor que: " + formatearFecha(lapsosFechas.fecha_tope)
-					);
 					$("#errFechaFin").html(
 						"No puede ser menor que: " +
 							formatearFecha(lapsosFechas.fecha_fin_llamado)
@@ -2678,5 +2784,16 @@ var LlamadoConcurso = {
 				},
 			});
 		}
+	},
+	validarDatos: function () {
+		let ok = true;
+		if ((llamadoConcursoFrm.numero_proceso = 0)) {
+			$("#errNumeroProceso").val("Debe espepecificar el número de proceso");
+			ok = false;
+		}
+		if ((llamadoConcursoFrm.id_modalidad = 0)) {
+			$("errModalid");
+		}
+		return ok;
 	},
 };

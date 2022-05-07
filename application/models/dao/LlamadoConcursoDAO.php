@@ -6,7 +6,20 @@
  * @author Gary Diaz <garyking1982@gmail.com>
  */
 class LlamadoConcursoDAO extends \CI_Model {
+  const TB_NOMBRE = 'public.llamado_concurso';
+
   public function buscar($rif, $numeroProceso) {
+    $this->db->where('rif_organoente', $rif);
+    $this->db->where('numero_proceso', $numeroProceso);
+    $query = $this->db->get(self::TB_NOMBRE);
+  }
+
+  public function agregar($llamadoConcurso) {
+    if ($this->buscar($llamadoConcurso['rif_organoente'], $llamadoConcurso['numeroProceso'])) {
+      throw new \Exception('El número proceso ya exciste');
+    } else {
+      return $this->db->insert(self::TB_NOMBRE, $llamadoConcurso);
+    }
   }
 
   public function calcularLapsos($fechaLlamado, int $diasHabiles, array $feriados) {
