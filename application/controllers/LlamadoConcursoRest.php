@@ -57,6 +57,24 @@ class LlamadoConcursoRest extends RestController {
     }
   }
 
+  public function llamado_concurso_post() {
+    try {
+      $llamadoConcurso = $this->_post_args;
+      $llamadoConcurso['estatus'] = "Iniciado";
+      $this->load->model('dao/LlamadoConcursoDAO');
+      $rs = $this->LlamadoConcursoDAO->agregar($llamadoConcurso);
+      if ($rs) {
+        $data = new Mensaje("El llamado a concurso ha sido registrado satisfactoriamente");
+        $data->setDato($this->LlamadoConcursoDAO->buscar($llamadoConcurso['rif_organoente'], $llamadoConcurso['numero_proceso']));
+        $this->response($data, self::HTTP_OK);
+      } else {
+        $this->response(new Mensaje("No se pundo registrar el llamado a concurso"), self::HTTP_BAD_REQUEST);
+      }
+    } catch (Exception $exc) {
+      $this->response(new Mensaje($exc->getMessage()), RestController::HTTP_BAD_REQUEST);
+    }
+  }
+
   private function buscarOrganoEntePorRif($rif) {
     try {
       $this->load->model('dao/OrganoDAO');

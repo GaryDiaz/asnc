@@ -33,7 +33,7 @@ class LlamadoConcursoDAO extends \CI_Model {
         if ($dh === 1 &&  $fechaDisponibleLlamado === null) {
           $fechaDisponibleLlamado = $fechaAux;
         }
-        if ($dh === 2 && $fechaFinAclaratoria === null) {
+        if ($dh === 3 && $fechaFinAclaratoria === null) {
           $fechaFinAclaratoria = $fechaAux;
         }
         if ($dh === $diasHabiles - 1 && $fechaTope === null) {

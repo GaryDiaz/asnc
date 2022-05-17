@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author Gary Diaz <garyking1982@gmail.com>
  */
@@ -16,7 +17,7 @@
             <form>
                 <div class="form-group">
                     <label for="txtDescripcion">Descripción</label>
-                    <input type="text" class="form-control" id="txtDescripcion" placeholder="Descripcion" maxlength="50">
+                    <input type="text" class="form-control" id="txtDescripcion" placeholder="Descripción" maxlength="70">
                 </div>
             </form>
         </div>

@@ -343,11 +343,7 @@ var sncApp = {
 			LlamadoConcurso.cambioLugarEntrega();
 		});
 		$("#btnGuardar").click(function () {
-			if (LlamadoConcurso.validarDatos()) {
-				alert("El formulario fue validado correctamente");
-			} else {
-				alert("Hay que revisar algunos datos");
-			}
+			LlamadoConcurso.agregar();
 		});
 	},
 	notificarError: function (error) {
@@ -2614,31 +2610,62 @@ var OrganoEnte = {
 };
 
 var LlamadoConcurso = {
+	agregar: function () {
+		if (LlamadoConcurso.validarDatos) {
+			$.ajax({
+				url: "apirest/llamadoConcurso",
+				method: "POST",
+				data: llamadoConcursoFrm,
+				success: function (json) {
+					alert(json.descripcion);
+				},
+				error: function (error) {
+					sncApp.notificarError(error);
+				},
+			});
+		} else {
+		}
+	},
 	cambioNumeroProceso: function () {
 		llamadoConcursoFrm.numero_proceso = $("#txtNumeroProceso").val();
+		if ($("#txtNumeroProceso").val() !== "") {
+			$("#errNumeroProceso").html("");
+		}
 	},
 	cambioSltModalidad: function () {
 		let id = $("#sltModalidad").val();
 		dataLapsos.id_modalidad = id;
 		llamadoConcursoFrm.id_modalidad = id;
+		if (id) {
+			$("#errModalidad").html("");
+		}
 		LlamadoConcurso.calcularLapsos();
 	},
 	cambioSltMecanismo: function () {
 		let id = $("#sltMecanismo").val();
 		dataLapsos.id_mecanismo = id;
 		llamadoConcursoFrm.id_mecanismo = id;
+		if (id) {
+			$("#errMecanismo").html("");
+		}
 		LlamadoConcurso.calcularLapsos();
 	},
 	cambioSltObjetoContratacion: function () {
 		let id = $("#sltObjetoContratacion").val();
 		dataLapsos.id_objeto_contratacion = id;
 		llamadoConcursoFrm.id_objeto_contratacion = id;
+		if (id) {
+			$("#errObjetoContratacion").html("");
+		}
 		LlamadoConcurso.calcularLapsos();
 	},
 	cambioTxtFechaLlamado: function () {
 		let fecha = $("#txtFechaLlamado").val();
 		dataLapsos.fechallamado = fecha;
 		llamadoConcursoFrm.fecha_llamado = fecha;
+		if (fecha !== "") {
+			$("#errFechaLlamado").html("");
+		}
 		LlamadoConcurso.calcularLapsos();
 	},
 	cambioTxtFechaFin: function () {
@@ -2676,20 +2703,35 @@ var LlamadoConcurso = {
 		llamadoConcursoFrm.denominacion_proceso = $(
 			"#txtDenominacionProceso"
 		).val();
+		if ($("#txtDenominacionProceso").val() !== "") {
+			$("#errDenominacionProceso").html("");
+		}
 	},
 	cambioDescripcionContratacion: function () {
 		llamadoConcursoFrm.descripcion_contratacion = $(
 			"#txtDescripcionContratacion"
 		).val();
+		if ($("#txtDescripcionContratacion").val() !== "") {
+			$("#errDescripcionContratacion").html("");
+		}
 	},
 	cambioWebContratante: function () {
 		llamadoConcursoFrm.web_contratante = $("#txtWebContratante").val();
+		if ($("#txtWebContratante").val() !== "") {
+			$("#errWebContratante").html("");
+		}
 	},
 	cambioHoraDesde: function () {
 		llamadoConcursoFrm.hora_desde = $("#txtHoraDesde").val();
+		if ($("#txtHoraDesde").val() !== "") {
+			$("#errHoraDesde").html("");
+		}
 	},
 	cambioHoraHasta: function () {
 		llamadoConcursoFrm.hora_hasta = $("#txtHoraHasta").val();
+		if ($("#txtHoraHasta").val() !== "") {
+			$("#errHoraHasta").html("");
+		}
 	},
 	cambioEstado: function () {
 		$.ajax({
@@ -2706,17 +2748,27 @@ var LlamadoConcurso = {
 				});
 				$("#sltMunicipio").html(salida);
 				llamadoConcursoFrm.id_estado = $("#sltEstado").val();
+				$("#errEstado").html("");
 			},
 		});
 	},
 	cambioMunicipio: function () {
 		llamadoConcursoFrm.id_municipio = $("#sltMunicipio").val();
+		if ($("#sltMunicipio").val() !== "") {
+			$("#errMunicipio").html("");
+		}
 	},
 	cambioDireccion: function () {
 		llamadoConcursoFrm.direccion = $("#txtDireccion").val();
+		if ($("#txtDireccion").val() !== "") {
+			$("#errDireccion").html("");
+		}
 	},
 	cambioHoraDesdeSobre: function () {
 		llamadoConcursoFrm.hora_desde_sobre = $("#txtHoraDesdeSobre").val();
+		if ($("#txtHoraDesdeSobre").val() !== "") {
+			$("#errHoraDesdeSobre").html("");
+		}
 	},
 	cambioEstadoSobre: function () {
 		$.ajax({
@@ -2733,17 +2785,27 @@ var LlamadoConcurso = {
 				});
 				$("#sltMunicipioSobre").html(salida);
 				llamadoConcursoFrm.id_estado_sobre = $("#sltEstadoSobre").val();
+				$("#errEstadoSobre").html("");
 			},
 		});
 	},
 	cambioMunicipioSobre: function () {
 		llamadoConcursoFrm.id_municipio_sobre = $("#sltMunicipioSobre").val();
+		if ($("#sltMunicipioSobre").val() !== "") {
+			$("#errMunicipioSobre").html("");
+		}
 	},
 	cambioDireccionSobre: function () {
 		llamadoConcursoFrm.direccion_sobre = $("#txtDireccionSobre").val();
+		if ($("#txtDireccionSobre").val() !== "") {
+			$("#errDireccionSobre").html("");
+		}
 	},
 	cambioLugarEntrega: function () {
 		llamadoConcursoFrm.lugar_entrega = $("#txtLugarEntrega").val();
+		if ($("#txtLugarEntrega").val() !== "") {
+			$("#errLugarEntrega").html("");
+		}
 	},
 	calcularLapsos: function () {
 		if (

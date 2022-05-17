@@ -38,6 +38,7 @@ $route['frmLapso'] = 'Formulario/lapso';
 //******************************************************************************
 $route['apirest/calcularLapsos/(:any)/(:any)/(:num)/(:num)/(:num)']['get'] = 'LlamadoConcursoRest/calcular_lapsos/$1/$2/$3/$4/$5';
 $route['apirest/recalcularLapsos/(:any)/(:any)/(:any)']['get'] = 'LlamadoConcursoRest/recalcular_lapsos/$1/$2/$3';
+$route['apirest/llamadoConcurso']['post'] = 'LlamadoConcursoRest/llamado_concurso';
 
 //******************************************************************************
 //***                      RUTAS PARA LAS DIRECCIONES                        ***
@@ -89,7 +90,7 @@ $route['apirest/miperfilinstitucionaldetalle']['get'] = 'OrganoEnteRest/organo_p
 //******************************************************************************
 //******************************************************************************
 //***                Rutas para los Feriados Específicos                     ***
-//****************************************************************************** 
+//******************************************************************************
 $route['apirest/feriadoEspecifico/(:any)']['get'] = 'FeriadoRest/feriado_especifico/$1';                //PK (fecha (aaaa-mm-dd))
 $route['apirest/feriadosEspecificos']['get'] = 'FeriadoRest/feriados_especificos';                      //Todos
 $route['apirest/feriadosEspecificos/(:num)']['get'] = 'FeriadoRest/feriados_especificos_por_anio/$1';   //Varios por año
@@ -115,7 +116,7 @@ $route['apirest/feriadoNacional/(:num)/(:num)']['delete'] = 'FeriadoRest/feriado
 //******************************************************************************
 //******************************************************************************
 //***                Rutas para los Feriados Estadales                       ***
-//****************************************************************************** 
+//******************************************************************************
 $route['apirest/feriadoEstadal/(:num)/(:num)/(:num)']['get'] = 'FeriadoRest/feriado_estadal/$1/$2/$3';      //PK (id_estado, mes y dia)
 $route['apirest/feriadosEstadales/(:num)']['get'] = 'FeriadoRest/feriados_estadales/$1';                    //Todos por id_estado
 $route['apirest/feriadosEstadales/(:num)/(:num)']['get'] = 'FeriadoRest/feriados_estadales_cercanos/$1/$2'; //Varios por id_estado y mes
@@ -127,7 +128,7 @@ $route['apirest/feriadoEstadal/(:num)/(:num)/(:num)']['delete'] = 'FeriadoRest/f
 //******************************************************************************
 //******************************************************************************
 //***                 Rutas para los Feriados Municipales                    ***
-//****************************************************************************** 
+//******************************************************************************
 $route['apirest/feriadoMunicipal/(:num)/(:num)/(:num)']['get'] = 'FeriadoRest/feriado_municipal/$1/$2/$3';  //PK (id_municipio, mes y dia)
 $route['apirest/feriadosMunicipales/(:num)']['get'] = 'FeriadoRest/feriados_municipales/$1';                //Todos por id_municipio
 $route['apirest/feriadosMunicipales/(:num)/(:num)']['get'] = 'FeriadoRest/feriados_municipales_cercanos/$1/$2'; //Varios por id_municipio y mes
