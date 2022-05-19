@@ -15,7 +15,7 @@ class LlamadoConcursoDAO extends \CI_Model {
   }
 
   public function agregar($llamadoConcurso) {
-    if ($this->buscar($llamadoConcurso['rif_organoente'], $llamadoConcurso['numeroProceso'])) {
+    if ($this->buscar($llamadoConcurso['rif_organoente'], $llamadoConcurso['numero_proceso'])) {
       throw new \Exception('El número proceso ya exciste');
     } else {
       return $this->db->insert(self::TB_NOMBRE, $llamadoConcurso);

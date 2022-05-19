@@ -39,7 +39,7 @@
           <div class="row">
             <div class="form-group col-lg-3 col-md-6 col-sm-12">
               <label for="txtNumeroProceso">Número de Proceso</label>
-              <input type="number" class="form-control" id="txtNumeroProceso" placeholder="Número de Proceso" require>
+              <input type="text" class="form-control" id="txtNumeroProceso" placeholder="Número de Proceso" maxlength="40" require>
               <small id="errNumeroProceso" class="form-text text-muted text-red-darker"></small>
             </div>
             <div class="form-group col-lg-3 col-md-6 col-sm-12">
@@ -156,7 +156,8 @@
             </div>
             <div class="form-group col-lg-4 col-md-4 col-sm-12">
               <label for="txtFechaFinAclaratoria">Fecha Fin de Aclaratoria</label>
-              <input type="date" class="form-control" id="txtFechaFinAclaratoria" disabled>
+              <input type="date" class="form-control" id="txtFechaFinAclaratoria">
+              <small id="errFechaFinAclaratoria" class="form-text text-muted text-red-darker"></small>
             </div>
             <div class="form-group col-lg-4 col-md-4 col-sm-12">
               <label for="txtFechaTope">Fecha Tope</label>

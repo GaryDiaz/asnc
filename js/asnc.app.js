@@ -307,6 +307,9 @@ var sncApp = {
 		$("#txtFechaFin").change(function () {
 			LlamadoConcurso.cambioTxtFechaFin();
 		});
+		$("#txtFechaFinAclaratoria").change(function () {
+			LlamadoConcurso.cambioTxtFechaFinAclaratoria();
+		});
 		$("#txtWebContratante").change(function () {
 			LlamadoConcurso.cambioWebContratante();
 		});
@@ -2611,7 +2614,7 @@ var OrganoEnte = {
 
 var LlamadoConcurso = {
 	agregar: function () {
-		if (LlamadoConcurso.validarDatos) {
+		if (LlamadoConcurso.validarDatos()) {
 			$.ajax({
 				url: "apirest/llamadoConcurso",
 				method: "POST",
@@ -2624,6 +2627,7 @@ var LlamadoConcurso = {
 				},
 			});
 		} else {
+			alert("Debe revisar los datos antes de enviarlos");
 		}
 	},
 	cambioNumeroProceso: function () {
@@ -2697,6 +2701,36 @@ var LlamadoConcurso = {
 					$("#txtFechaEntrega").val(fechaFin);
 				},
 			});
+		}
+	},
+	cambioTxtFechaFinAclaratoria: function () {
+		let fechaFinAclaratoria = $("#txtFechaFinAclaratoria").val();
+		let fchNueva = new Date(fechaFinAclaratoria);
+		let diaSem = fchNueva.getDay();
+		let fchLapso = new Date(lapsosFechas.fecha_fin_aclaratoria);
+		let fchTope = new Date(lapsosFechas.fecha_tope);
+		if (fchNueva.getTime() >= fchLapso.getTime() && fchNueva < fchTope) {
+			if (diaSem < 5) {
+				llamadoConcursoFrm.fecha_fin_aclaratoria = fechaFinAclaratoria;
+				$("#errFechaFinAclaratoria").html("");
+			} else {
+				$("#errFechaFinAclaratoria").html(
+					"La fecha seleccionada está un fin de semana"
+				);
+			}
+		} else {
+			if (fchNueva < fchLapso) {
+				$("#errFechaFinAclaratoria").html(
+					"La fecha no puede ser menor a " +
+						formatearFecha(lapsosFechas.fecha_fin_aclaratoria)
+				);
+			}
+			if (fchNueva.getTime() >= fchTope.getTime()) {
+				$("#errFechaFinAclaratoria").html(
+					"La fecha no puede ser mayor o igual a " +
+						formatearFecha(lapsosFechas.fecha_tope)
+				);
+			}
 		}
 	},
 	cambioDenominacionProceso: function () {
