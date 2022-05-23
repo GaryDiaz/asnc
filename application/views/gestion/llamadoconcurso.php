@@ -7,224 +7,44 @@
 
 <div id="content" class="content">
   <div id="areaDeNotificacion"></div>
-  <div class="row">
-    <div class="col-lg-12">
-      <h3 class="text-center" id="tituloForm"><i class="ion-ios-list-outline"></i> Registro de Llamado a Concurso</h3>
-      <form>
-        <fieldset class="border border-success p-10 shadow-lg">
-          <legend class="font-weight-bold">Datos del Organo-Ente</legend>
-          <div class="row">
-            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-              <label for="txtRif">RIF</label>
-              <input type="text" class="form-control" id="txtRif" placeholder="RIF" maxlength="10" disabled>
-            </div>
-            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-              <label for="lblSiglas">Siglas</label>
-              <input type="text" readonly class="form-control-plaintext" id="txtSiglas">
-            </div>
-            <div class="form-group col-lg-6 col-md-12 col-sm-12">
-              <label for="lblDescripcion">Descripción</label>
-              <input type="text" readonly class="form-control-plaintext" id="txtDescripcion">
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-lg-12 col-md-12 col-sm-12">
-              <label for="txtDireccionOE">Dirección</label>
-              <input type="text" readonly class="form-control-plaintext" id="txtDireccionOE">
-            </div>
-          </div>
-        </fieldset>
-        <fieldset class="border border-success p-10 shadow-lg">
-          <legend class="font-weight-bold">Datos del Llamado a Concurso</legend>
-          <div class="row">
-            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-              <label for="txtNumeroProceso">Número de Proceso</label>
-              <input type="text" class="form-control" id="txtNumeroProceso" placeholder="Número de Proceso" maxlength="40" require>
-              <small id="errNumeroProceso" class="form-text text-muted text-red-darker"></small>
-            </div>
-            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-              <label for="txtFechaLlamado">Fecha de Llamado</label>
-              <input type="date" class="form-control" id="txtFechaLlamado" placeholder="Fecha de llamado" require>
-              <small id="errFechaLlamado" class="form-text text-muted text-red-darker"></small>
-            </div>
-            <div class="form-group col-lg-6 col-md-12 col-sm-12">
-              <label for="txtDenominacionProceso">Denominación del Proceso</label>
-              <input type="text" class="form-control" id="txtDenominacionProceso" placeholder="Denominación del Proceso" maxlength="100" require>
-              <small id="errDenominacionProceso" class="form-text text-muted text-red-darker"></small>
-            </div>
-          </div>
-          <div id="row">
-            <div class="form-group col-lg-12 col-md-12 col-sm-12">
-              <label for="txtDescripcionContratacion">Descripción de Contratación</label>
-              <input type="text" class="form-control" id="txtDescripcionContratacion" placeholder="Descripcion de Contratación" maxlength="250" require>
-              <small id="errDescripcionContratacion" class="form-text text-muted text-red-darker"></small>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset class="border border-success p-10 shadow-lg">
-          <legend class="font-weight-bold">Lapsos</legend>
-          <div class="row">
-            <div class="form-group col-lg-3 col-md-3 col-sm-6">
-              <label for="sltModalidad">Modalidad</label>
-              <select id="sltModalidad" class="form-control">
-                <option>Modalidad</option>
-              </select>
-              <small id="errModalidad" class="form-text text-muted text-red-darker"></small>
-            </div>
-            <div class="form-group col-lg-3 col-md-3 col-sm-6">
-              <label for="sltMecanismo">Mecanismo</label>
-              <select id="sltMecanismo" class="form-control">
-                <option>Mecanismo</option>
-              </select>
-              <small id="errMecanismo" class="form-text text-muted text-red-darker"></small>
-            </div>
-            <div class="form-group col-lg-3 col-md-3 col-sm-6">
-              <label for="sltObjetoContratacion">Objeto de Contratacion</label>
-              <select id="sltObjetoContratacion" class="form-control">
-                <option>Objeto de Contratacion</option>
-              </select>
-              <small id="errObjetoContratacion" class="form-text text-muted text-red-darker"></small>
-            </div>
-            <div class="form-group col-lg-3 col-md-3 col-sm-6">
-              <label for="txtDiasHabiles">Días Hábiles</label>
-              <input type="text" readonly class="form-control-plaintext" id="txtDiasHabiles">
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-lg-6 col-md-6 col-sm-12">
-              <label for="txtFechaDisponibleLlamado">Fecha de Disponibilidad del Llamado</label>
-              <input type="date" class="form-control" id="txtFechaDisponibleLlamado" disabled>
-            </div>
-            <div class="form-group col-lg-6 col-md-6 col-sm-12">
-              <label for="txtFechaFin">Fecha Fin</label>
-              <input type="date" class="form-control" id="txtFechaFin" require>
-              <small id="errFechaFin" class="form-text text-muted text-red-darker" hidden>Error</small>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset class="border border-success p-10 shadow-lg">
-          <legend class="font-weight-bold">Datos de contacto</legend>
-          <div class="row">
-            <div class="form-group col-lg-12 col-md-12 col-sm-12">
-              <label for="txtWebContratante">Página Web</label>
-              <input type="text" class="form-control" id="txtWebContratante" placeholder="Página Web" maxlength="100">
-            </div>
-          </div>
-        </fieldset>
-        <fieldset class="border border-success p-10 shadow-lg">
-          <legend class="font-weight-bold">Dirección para la adquisición de retiro de pliego</legend>
-          <div class="row">
-            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-              <label for="txtHoraDesde">Hora desde</label>
-              <input type="time" class="form-control" id="txtHoraDesde" placeholder="Hora Desde" require>
-              <small id="errHoraDesde" class="form-text text-muted text-red-darker"></small>
-            </div>
-            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-              <label for="txtHoraHasta">Hora hasta</label>
-              <input type="time" class="form-control" id="txtHoraHasta" placeholder="Hora Hasta" require>
-              <small id="errHoraHasta" class="form-text text-muted text-red-darker"></small>
-            </div>
-            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-              <label for="sltEstado">Estado</label>
-              <select id="sltEstado" class="form-control">
-                <option>Estado</option>
-              </select>
-              <small id="errEstado" class="form-text text-muted text-red-darker"></small>
-            </div>
-            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-              <label for="sltMunicipio">Municipio</label>
-              <select id="sltMunicipio" class="form-control">
-                <option>Municipio</option>
-              </select>
-              <small id="errMunicipio" class="form-text text-muted text-red-darker"></small>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-lg-12 col-md-12 col-sm-12">
-              <label for="txtDireccion">Dirección</label>
-              <input type="text" class="form-control" id="txtDireccion" placeholder="Dirección" maxlength="250" require>
-              <small id="errDireccion" class="form-text text-muted text-red-darker"></small>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset class="border border-success p-10 shadow-lg">
-          <legend class="font-weight-bold">Períodos de Aclaratoria</legend>
-          <div class="row">
-            <div class="form-group col-lg-4 col-md-4 col-sm-12">
-              <label for="txtFechaInicioAclaratoria">Fecha Inicio de Aclaratoria</label>
-              <input type="date" class="form-control" id="txtFechaInicioAclaratoria" disabled>
-            </div>
-            <div class="form-group col-lg-4 col-md-4 col-sm-12">
-              <label for="txtFechaFinAclaratoria">Fecha Fin de Aclaratoria</label>
-              <input type="date" class="form-control" id="txtFechaFinAclaratoria">
-              <small id="errFechaFinAclaratoria" class="form-text text-muted text-red-darker"></small>
-            </div>
-            <div class="form-group col-lg-4 col-md-4 col-sm-12">
-              <label for="txtFechaTope">Fecha Tope</label>
-              <input type="date" class="form-control" id="txtFechaTope" disabled>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset class="border border-success p-10 shadow-lg">
-          <legend class="font-weight-bold">Apertura de Sobres</legend>
-          <div class="row">
-            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-              <label for="txtFechaEntrega">Fecha de Entrega</label>
-              <input type="date" class="form-control" id="txtFechaEntrega" disabled>
-            </div>
-            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-              <label for="txtHoraDesdeSobre">Hora Desde</label>
-              <input type="time" class="form-control" id="txtHoraDesdeSobre" require>
-              <small id="errHoraDesdeSobre" class="form-text text-muted text-red-darker"></small>
-            </div>
-            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-              <label for="sltEstadoSobre">Estado</label>
-              <select id="sltEstadoSobre" class="form-control">
-                <option>Estado</option>
-              </select>
-              <small id="errEstadoSobre" class="form-text text-muted text-red-darker"></small>
-            </div>
-            <div class="form-group col-lg-3 col-md-6 col-sm-12">
-              <label for="sltMunicipioSobre">Municipio</label>
-              <select id="sltMunicipioSobre" class="form-control">
-                <option>Municipio</option>
-              </select>
-              <small id="errMunicipioSobre" class="form-text text-muted text-red-darker"></small>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-lg-12 col-md-12 col-sm-12">
-              <label for="txtDireccionSobre">Dirección</label>
-              <input type="text" class="form-control" id="txtDireccionSobre" placeholder="Dirección" maxlength="250" require>
-              <small id="errDireccionSobre" class="form-text text-muted text-red-darker"></small>
-            </div>
-          </div>
-          <div class="row">
-            <div class="form-group col-lg-12 col-md-12 col-sm-12">
-              <label for="txtLugarEntrega">Lugar Entrega</label>
-              <input type="text" class="form-control" id="txtLugarEntrega" placeholder="Lugar de Entrega" maxlength="250" require>
-              <small id="errLugarEntrega" class="form-text text-muted text-red-darker"></small>
-            </div>
-          </div>
-        </fieldset>
-        <br />
-        <div class="footer ">
-          <button type="button" class="btn btn-primary btn-lg float-right" id="btnGuardar"><i class="ion-compose"></i> Guardar Cambios</button>
+  <div id="areaDeLlamadoConcurso">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#"><i class="ion-chatbox"></i> Llamado a Concurso</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarLlamadoConcurso" aria-controls="navbarLlamadoConcurso" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarLlamadoConcurso">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="ion-ios-list-outline"> </i>Motrar Todos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#opcionesConsultaPropia" role="button" aria-expanded="false" aria-controls="opcionesConsultaPropia"><i class="ion-ios-search-strong"></i> Consulta Propios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#opcionesFiltroLlamado" role="button" aria-expanded="false" aria-controls="opcionesOpcionesFiltroLlamado"><i class="ion-android-options"></i> Filtro</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?= base_url() ?>index.php/regllamadoconcurso"><i class="ion-plus"></i> Registrar</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div>
+      <div class="collapse multi-collapse" id="opcionesConsultaPropia">
+        <div class="card card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
         </div>
-      </form>
+      </div>
+    </div>
+    <div class="collapse multi-collapse" id="opcionesFiltroLlamado">
+      <div class="card card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+      </div>
+    </div>
+    <div id="resultadosLlamadoConcurso">
+      No se ha encontrado ningún resultado
     </div>
   </div>
 </div>
-
-<style>
-  fieldset>legend {
-    font-size: 12pt;
-    margin-left: 8px;
-  }
-
-  fieldset {
-    margin-bottom: 5px;
-    margin-top: 5px;
-    border-radius: 12px;
-  }
-</style>

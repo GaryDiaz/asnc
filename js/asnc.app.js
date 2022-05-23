@@ -77,6 +77,29 @@ function formatearFecha(txtFecha) {
 	return arrayFecha[2] + "-" + arrayFecha[1] + "-" + arrayFecha[0];
 }
 
+function formatearHora(txtHora) {
+	let arrayHora = txtHora.split(":");
+	let hora = arrayHora[0];
+	let minuto = arrayHora[1];
+	let meridian = "am";
+	if (Number(hora) < 12) {
+		if (Number(hora) === 0) {
+			hora = "12";
+		}
+	} else {
+		if (Number(hora) > 12) {
+			if (Number(hora) >= 22) {
+				hora = toString(Number(hora) - 12);
+			} else {
+				hora = "0" + (Number(hora) - 12);
+			}
+			meridian = "pm";
+		}
+	}
+	//return (fecha.getDay()+1)+' de '+ meses[fecha.getMonth()-1]+' de '+fecha.getFullYear();
+	return hora + ":" + minuto + " " + meridian;
+}
+
 /**
  * sncApp
  * Es el módulo que GESTIONA de manera general, las interfaces en el FRONT-END
@@ -95,7 +118,11 @@ var sncApp = {
 				sncApp.inicializarOrganoEntePropio();
 				break;
 			case "/llamadoconcurso":
+				sncApp.inicializarLlamadoConcurso();
+				break;
+			case "/regllamadoconcurso":
 				sncApp.inicializarRegistroLlamado();
+				break;
 		}
 	},
 	enviarNotificacion: function (descripcion, t, i, frm) {
@@ -205,6 +232,15 @@ var sncApp = {
 		});
 		$("#btnGuardar").click(function () {
 			OrganoEnte.editar();
+		});
+	},
+	inicializarLlamadoConcurso: function () {
+		$.ajax({
+			url: "apirest/llamadoConcurso",
+			method: "GET",
+			success: function (json) {
+				LlamadoConcurso.mostrarTodos(json.datos);
+			},
 		});
 	},
 	inicializarRegistroLlamado: function () {
@@ -2888,6 +2924,172 @@ var LlamadoConcurso = {
 			});
 		}
 	},
+	mostrarLlamado: function (llamadoConcurso) {
+		let salida = "";
+		salida +=
+			'\n\
+<div class="card shadow-sm p-3 mb-3">\n\
+  <div class="card-header text-center">' +
+			llamadoConcurso.numero_proceso +
+			" " +
+			llamadoConcurso.fecha_llamado +
+			'\n\
+  </div>\n\
+  <div class="card-body">\n\
+    <h5 class="card-title text-center bg-dark text-light">LLAMADO A CONCURSO</h5>\n\
+    <div class="row">\n\
+			<div class="col-sm-4 col-md-4 col-lg-3 col-xl-2"><div class="font-weight-bold">Número de Proceso: </div>' +
+			llamadoConcurso.numero_proceso +
+			'\n\
+			</div>\n\
+			<div class="col-sm-8 col-md-8 col-lg-9 col-xl-10"><div class="font-weight-bold">Denominación del Proceso: </div>' +
+			llamadoConcurso.denominacion_proceso +
+			'\n\
+			</div>\n\
+			<div class="col-sm-4 col-md-4 col-lg-3 col-xl-2"><div class="font-weight-bold">Fecha de Llamado: </div>' +
+			formatearFecha(llamadoConcurso.fecha_llamado) +
+			'\n\
+			</div>\n\
+			<div class="col-sm-8 col-md-8 col-lg-9 col-xl-10"><div class="font-weight-bold">Descripción de Contratación: </div>' +
+			llamadoConcurso.descripcion_contratacion +
+			'\n\
+			</div>\n\
+		</div>\n\
+  </div>\n\
+	<div class="card-body">\n\
+    <h5 class="card-title text-center bg-dark text-light">DATOS DEL ÓRGANO O ENTE</h5>\n\
+    <div class="row">\n\
+			<div class="col-6 col-sm-3 col-md-3 col-lg-2 col-xl-2"><div class="font-weight-bold">Rif: </div>' +
+			llamadoConcurso.rif_organoente +
+			'\n\
+			</div>\n\
+			<div class="col-6 col-sm-3 col-md-2 col-lg-2 col-xl-1"><div class="font-weight-bold">Siglas: </div>' +
+			llamadoConcurso.siglas +
+			'\n\
+			</div>\n\
+			<div class="col-sm-6 col-md-7 col-lg-8 col-xl-6"><div class="font-weight-bold">Descripción: </div>' +
+			llamadoConcurso.organoente +
+			'\n\
+			</div>\n\
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-3"><div class="font-weight-bold">Página Web: </div>' +
+			llamadoConcurso.web_contratante +
+			'\n\
+			</div>\n\
+		</div>\n\
+  </div>\n\
+	<div class="card-body">\n\
+    <h5 class="card-title text-center bg-dark text-light">LAPSOS</h5>\n\
+    <div class="row">\n\
+			<div class="col-6 col-sm-4 col-md-4 col-lg-4"><div class="font-weight-bold">Modalidad: </div>' +
+			llamadoConcurso.modalidad +
+			'\n\
+			</div>\n\
+			<div class="col-6 col-sm-4 col-md-4"><div class="font-weight-bold">Mecanismo: </div>' +
+			llamadoConcurso.mecanismo +
+			'\n\
+			</div>\n\
+			<div class="col-6 col-sm-4 col-md-4"><div class="font-weight-bold">Objeto de Contratación: </div>' +
+			llamadoConcurso.objeto_contratacion +
+			'\n\
+			</div>\n\
+			<div class="col-6 col-sm-4 col-md-4"><div class="font-weight-bold">Días hábiles: </div>' +
+			llamadoConcurso.dias_habiles +
+			'\n\
+			</div>\n\
+			<div class="col-6 col-sm-4 col-md-4"><div class="font-weight-bold">Fecha de Disponibilidad: </div>' +
+			formatearFecha(llamadoConcurso.fecha_disponible_llamado) +
+			'\n\
+			</div>\n\
+			<div class="col-6 col-sm-4 col-md-4"><div class="font-weight-bold">Fecha Fin: </div>' +
+			formatearFecha(llamadoConcurso.fecha_fin_llamado) +
+			'\n\
+			</div>\n\
+		</div>\n\
+  </div>\n\
+	<div class="card-body">\n\
+    <h5 class="card-title text-center bg-dark text-light">DIRECCIÓN PARA ADQUISICIÓN DE RETIRO DE PLIEGO</h5>\n\
+    <div class="row">\n\
+			<div class="col-6 col-sm-6 col-md-6 col-lg-2"><div class="font-weight-bold">Hora desde: </div>' +
+			formatearHora(llamadoConcurso.hora_desde) +
+			'\n\
+			</div>\n\
+			<div class="col-6 col-sm-6 col-md-6 col-lg-2"><div class="font-weight-bold">Hora hasta: </div>' +
+			formatearHora(llamadoConcurso.hora_hasta) +
+			'\n\
+			</div>\n\
+			<div class="col-sm-12 col-md-12 col-lg-8"><div class="font-weight-bold">Dirección: </div>' +
+			llamadoConcurso.direccion +
+			", Municipio " +
+			llamadoConcurso.municipio +
+			" (" +
+			llamadoConcurso.estado +
+			")" +
+			'\n\
+			</div>\n\
+		</div>\n\
+  </div>\n\
+	<div class="card-body">\n\
+    <h5 class="card-title text-center bg-dark text-light">PERÍODOS DE ACLARATORIA</h5>\n\
+    <div class="row">\n\
+			<div class="col-6 col-sm-4"><div class="font-weight-bold">Fecha Inicio de Aclaratoria: </div>' +
+			formatearFecha(llamadoConcurso.fecha_llamado) +
+			'\n\
+			</div>\n\
+			<div class="col-6 col-sm-4"><div class="font-weight-bold">Fecha Fin de Aclaratoria: </div>' +
+			formatearFecha(llamadoConcurso.fecha_fin_aclaratoria) +
+			'\n\
+			</div>\n\
+			<div class="col-sm-4"><div class="font-weight-bold">Fecha Tope: </div>' +
+			formatearFecha(llamadoConcurso.fecha_tope) +
+			'\n\
+			</div>\n\
+		</div>\n\
+  </div>\n\
+	<div class="card-body">\n\
+    <h5 class="card-title text-center bg-dark text-light">APERTURA DE SOBRES</h5>\n\
+    <div class="row">\n\
+			<div class="col-6 col-sm-6 col-md-6 col-lg-2"><div class="font-weight-bold">Fecha de Entrega: </div>' +
+			formatearFecha(llamadoConcurso.fecha_fin_llamado) +
+			'\n\
+			</div>\n\
+			<div class="col-6 col-sm-6 col-md-6 col-lg-2"><div class="font-weight-bold">Hora Desde: </div>' +
+			formatearHora(llamadoConcurso.hora_desde_sobre) +
+			'\n\
+			</div>\n\
+			<div class="col-sm-12 col-md-12 col-lg-8"><div class="font-weight-bold">Lugar de Entrega: </div>' +
+			llamadoConcurso.lugar_entrega +
+			'\n\
+			</div>\n\
+			<div class="col-sm-12 col-md-12 col-lg-12"><div class="font-weight-bold">Dirección: </div>' +
+			llamadoConcurso.direccion_sobre +
+			", Municipio " +
+			llamadoConcurso.municipio_sobre +
+			" (" +
+			llamadoConcurso.estado_sobre +
+			")" +
+			'\n\
+			</div>\n\
+		</div>\n\
+  </div>\n\
+  <div class="card-footer text-muted text-center">\n\
+    Estatus: ' +
+			llamadoConcurso.estatus +
+			"\n\
+  </div>\n\
+</div>";
+		return salida;
+	},
+	mostrarTodos: function (list, contenedor) {
+		console.log("mostrarTodos");
+		console.log(list);
+
+		//(contenedor = undefined) ? "#resultadosLlamadoConcurso" : contenedor;
+		let salida = "";
+		$.each(list, function (i, llamadoConcurso) {
+			salida += LlamadoConcurso.mostrarLlamado(llamadoConcurso);
+		});
+		$("#resultadosLlamadoConcurso").html(salida);
+	},
 	validarDatos: function () {
 		let ok = true;
 		if (llamadoConcursoFrm.numero_proceso === "") {
@@ -2974,7 +3176,6 @@ var LlamadoConcurso = {
 			);
 			ok = false;
 		}
-
 		return ok;
 	},
 };

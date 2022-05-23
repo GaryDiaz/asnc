@@ -7,11 +7,18 @@
  */
 class LlamadoConcursoDAO extends \CI_Model {
   const TB_NOMBRE = 'public.llamado_concurso';
+  const VW_NOMBRE = 'public.llamado_concurso_view';
 
   public function buscar($rif, $numeroProceso) {
     $this->db->where('rif_organoente', $rif);
     $this->db->where('numero_proceso', $numeroProceso);
-    $query = $this->db->get(self::TB_NOMBRE);
+    $query = $this->db->get(self::VW_NOMBRE);
+    return $query->result();
+  }
+
+  public function buscarTodos() {
+    $query = $this->db->get(self::VW_NOMBRE);
+    return $query->result();
   }
 
   public function agregar($llamadoConcurso) {

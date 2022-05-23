@@ -38,6 +38,22 @@ class LlamadoConcursoRest extends RestController {
     }
   }
 
+  public function buscar_todos_get() {
+    try {
+      $this->load->model('dao/LlamadoConcursoDAO');
+      $res = $this->LlamadoConcursoDAO->buscarTodos();
+      if ($res) {
+        $data = new Mensaje("Lista de Llamado a concurso");
+        $data->setDatos($res, "Lista");
+        $this->response($data, self::HTTP_OK);
+      } else {
+        $this->response(new Mensaje("No se encontraron llamados a concurso"), self::HTTP_BAD_REQUEST);
+      }
+    } catch (Exception $exc) {
+      $this->response(new Mensaje($exc->getMessage()), self::HTTP_BAD_REQUEST);
+    }
+  }
+
   public function recalcular_lapsos_get(string $rif, $fechaLlamado, $fecha_fin_llamado) {
     try {
       $oe = $this->buscarOrganoEntePorRif($rif);

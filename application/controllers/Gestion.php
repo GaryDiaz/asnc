@@ -40,6 +40,14 @@ class Gestion extends CI_Controller {
     $this->sesionIniciada();
     $this->load->view('templates/header.php');
     $this->load->view('templates/navigator.php');
+    $this->load->view('gestion/regllamadoconcurso.php');
+    $this->load->view('templates/footer.php');
+  }
+
+  public function llamadoconcurso() {
+    $this->sesionIniciada();
+    $this->load->view('templates/header.php');
+    $this->load->view('templates/navigator.php');
     $this->load->view('gestion/llamadoconcurso.php');
     $this->load->view('templates/footer.php');
   }

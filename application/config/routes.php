@@ -11,7 +11,8 @@ $route['translate_uri_dashes'] = FALSE;
 $route['diasferiados'] = 'Gestion/dias_feriados';
 $route['gestionlapsos'] = 'Gestion/lapsos';
 $route['perfilinstitucional'] = 'Gestion/perfilinstitucional';
-$route['llamadoconcurso']['get'] = 'Gestion/registrollamado';
+$route['regllamadoconcurso']['get'] = 'Gestion/registrollamado';
+$route['llamadoconcurso']['get'] = 'Gestion/llamadoconcurso';
 //******************************************************************************
 //******************************************************************************
 //***               RUTAS PARA EL SERVICIO DE FORMULARIOS                    ***
@@ -38,7 +39,9 @@ $route['frmLapso'] = 'Formulario/lapso';
 //******************************************************************************
 $route['apirest/calcularLapsos/(:any)/(:any)/(:num)/(:num)/(:num)']['get'] = 'LlamadoConcursoRest/calcular_lapsos/$1/$2/$3/$4/$5';
 $route['apirest/recalcularLapsos/(:any)/(:any)/(:any)']['get'] = 'LlamadoConcursoRest/recalcular_lapsos/$1/$2/$3';
+$route['apirest/llamadoConcurso']['get'] = 'LlamadoConcursoRest/buscar_todos';
 $route['apirest/llamadoConcurso']['post'] = 'LlamadoConcursoRest/llamado_concurso';
+
 
 //******************************************************************************
 //***                      RUTAS PARA LAS DIRECCIONES                        ***

@@ -1,0 +1,18 @@
+.nav-link {
+	font-size: 16px;
+}
+
+.nav-link:hover {
+	font-weight: bold;
+	background-color: rgba(0, 0, 0, 0.25);
+}
+
+.card-body {
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+hr {
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
