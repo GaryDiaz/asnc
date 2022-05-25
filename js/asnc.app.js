@@ -2929,7 +2929,7 @@ var LlamadoConcurso = {
 		salida +=
 			'\n\
 <div class="card shadow-sm p-3 mb-3">\n\
-  <div class="card-header text-center">' +
+  <div class="card-header text-center bg-turquesa">' +
 			llamadoConcurso.numero_proceso +
 			" " +
 			llamadoConcurso.fecha_llamado +
@@ -2938,19 +2938,19 @@ var LlamadoConcurso = {
   <div class="card-body">\n\
     <h5 class="card-title text-center bg-dark text-light">LLAMADO A CONCURSO</h5>\n\
     <div class="row">\n\
-			<div class="col-sm-4 col-md-4 col-lg-3 col-xl-2"><div class="font-weight-bold">Número de Proceso: </div>' +
+			<div class="col-sm-4 col-md-4 col-lg-3 col-xl-2"><div class="font-weight-bold text-vinotinto">Número de Proceso: </div>' +
 			llamadoConcurso.numero_proceso +
 			'\n\
 			</div>\n\
-			<div class="col-sm-8 col-md-8 col-lg-9 col-xl-10"><div class="font-weight-bold">Denominación del Proceso: </div>' +
+			<div class="col-sm-8 col-md-8 col-lg-9 col-xl-10"><div class="font-weight-bold text-vinotinto">Denominación del Proceso: </div>' +
 			llamadoConcurso.denominacion_proceso +
 			'\n\
 			</div>\n\
-			<div class="col-sm-4 col-md-4 col-lg-3 col-xl-2"><div class="font-weight-bold">Fecha de Llamado: </div>' +
+			<div class="col-sm-4 col-md-4 col-lg-3 col-xl-2"><div class="font-weight-bold text-vinotinto">Fecha de Llamado: </div>' +
 			formatearFecha(llamadoConcurso.fecha_llamado) +
 			'\n\
 			</div>\n\
-			<div class="col-sm-8 col-md-8 col-lg-9 col-xl-10"><div class="font-weight-bold">Descripción de Contratación: </div>' +
+			<div class="col-sm-8 col-md-8 col-lg-9 col-xl-10"><div class="font-weight-bold text-vinotinto">Descripción de Contratación: </div>' +
 			llamadoConcurso.descripcion_contratacion +
 			'\n\
 			</div>\n\
@@ -2959,19 +2959,19 @@ var LlamadoConcurso = {
 	<div class="card-body">\n\
     <h5 class="card-title text-center bg-dark text-light">DATOS DEL ÓRGANO O ENTE</h5>\n\
     <div class="row">\n\
-			<div class="col-6 col-sm-3 col-md-3 col-lg-2 col-xl-2"><div class="font-weight-bold">Rif: </div>' +
+			<div class="col-6 col-sm-3 col-md-3 col-lg-2 col-xl-2"><div class="font-weight-bold text-vinotinto">Rif: </div>' +
 			llamadoConcurso.rif_organoente +
 			'\n\
 			</div>\n\
-			<div class="col-6 col-sm-3 col-md-2 col-lg-2 col-xl-1"><div class="font-weight-bold">Siglas: </div>' +
+			<div class="col-6 col-sm-3 col-md-2 col-lg-2 col-xl-1"><div class="font-weight-bold text-vinotinto">Siglas: </div>' +
 			llamadoConcurso.siglas +
 			'\n\
 			</div>\n\
-			<div class="col-sm-6 col-md-7 col-lg-8 col-xl-6"><div class="font-weight-bold">Descripción: </div>' +
+			<div class="col-sm-6 col-md-7 col-lg-8 col-xl-6"><div class="font-weight-bold text-vinotinto">Descripción: </div>' +
 			llamadoConcurso.organoente +
 			'\n\
 			</div>\n\
-			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-3"><div class="font-weight-bold">Página Web: </div>' +
+			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-3"><div class="font-weight-bold text-vinotinto">Página Web: </div>' +
 			llamadoConcurso.web_contratante +
 			'\n\
 			</div>\n\
@@ -2980,27 +2980,27 @@ var LlamadoConcurso = {
 	<div class="card-body">\n\
     <h5 class="card-title text-center bg-dark text-light">LAPSOS</h5>\n\
     <div class="row">\n\
-			<div class="col-6 col-sm-4 col-md-4 col-lg-4"><div class="font-weight-bold">Modalidad: </div>' +
+			<div class="col-6 col-sm-4 col-md-4 col-lg-4"><div class="font-weight-bold text-vinotinto">Modalidad: </div>' +
 			llamadoConcurso.modalidad +
 			'\n\
 			</div>\n\
-			<div class="col-6 col-sm-4 col-md-4"><div class="font-weight-bold">Mecanismo: </div>' +
+			<div class="col-6 col-sm-4 col-md-4"><div class="font-weight-bold text-vinotinto">Mecanismo: </div>' +
 			llamadoConcurso.mecanismo +
 			'\n\
 			</div>\n\
-			<div class="col-6 col-sm-4 col-md-4"><div class="font-weight-bold">Objeto de Contratación: </div>' +
+			<div class="col-6 col-sm-4 col-md-4"><div class="font-weight-bold text-vinotinto">Objeto de Contratación: </div>' +
 			llamadoConcurso.objeto_contratacion +
 			'\n\
 			</div>\n\
-			<div class="col-6 col-sm-4 col-md-4"><div class="font-weight-bold">Días hábiles: </div>' +
+			<div class="col-6 col-sm-4 col-md-4"><div class="font-weight-bold text-vinotinto">Días hábiles: </div>' +
 			llamadoConcurso.dias_habiles +
 			'\n\
 			</div>\n\
-			<div class="col-6 col-sm-4 col-md-4"><div class="font-weight-bold">Fecha de Disponibilidad: </div>' +
+			<div class="col-6 col-sm-4 col-md-4"><div class="font-weight-bold text-vinotinto">Fecha de Disponibilidad: </div>' +
 			formatearFecha(llamadoConcurso.fecha_disponible_llamado) +
 			'\n\
 			</div>\n\
-			<div class="col-6 col-sm-4 col-md-4"><div class="font-weight-bold">Fecha Fin: </div>' +
+			<div class="col-6 col-sm-4 col-md-4"><div class="font-weight-bold text-vinotinto">Fecha Fin: </div>' +
 			formatearFecha(llamadoConcurso.fecha_fin_llamado) +
 			'\n\
 			</div>\n\
@@ -3009,15 +3009,15 @@ var LlamadoConcurso = {
 	<div class="card-body">\n\
     <h5 class="card-title text-center bg-dark text-light">DIRECCIÓN PARA ADQUISICIÓN DE RETIRO DE PLIEGO</h5>\n\
     <div class="row">\n\
-			<div class="col-6 col-sm-6 col-md-6 col-lg-2"><div class="font-weight-bold">Hora desde: </div>' +
+			<div class="col-6 col-sm-6 col-md-6 col-lg-2"><div class="font-weight-bold text-vinotinto">Hora desde: </div>' +
 			formatearHora(llamadoConcurso.hora_desde) +
 			'\n\
 			</div>\n\
-			<div class="col-6 col-sm-6 col-md-6 col-lg-2"><div class="font-weight-bold">Hora hasta: </div>' +
+			<div class="col-6 col-sm-6 col-md-6 col-lg-2"><div class="font-weight-bold text-vinotinto">Hora hasta: </div>' +
 			formatearHora(llamadoConcurso.hora_hasta) +
 			'\n\
 			</div>\n\
-			<div class="col-sm-12 col-md-12 col-lg-8"><div class="font-weight-bold">Dirección: </div>' +
+			<div class="col-sm-12 col-md-12 col-lg-8"><div class="font-weight-bold text-vinotinto">Dirección: </div>' +
 			llamadoConcurso.direccion +
 			", Municipio " +
 			llamadoConcurso.municipio +
@@ -3031,15 +3031,15 @@ var LlamadoConcurso = {
 	<div class="card-body">\n\
     <h5 class="card-title text-center bg-dark text-light">PERÍODOS DE ACLARATORIA</h5>\n\
     <div class="row">\n\
-			<div class="col-6 col-sm-4"><div class="font-weight-bold">Fecha Inicio de Aclaratoria: </div>' +
+			<div class="col-6 col-sm-4"><div class="font-weight-bold text-vinotinto">Fecha Inicio de Aclaratoria: </div>' +
 			formatearFecha(llamadoConcurso.fecha_llamado) +
 			'\n\
 			</div>\n\
-			<div class="col-6 col-sm-4"><div class="font-weight-bold">Fecha Fin de Aclaratoria: </div>' +
+			<div class="col-6 col-sm-4"><div class="font-weight-bold text-vinotinto">Fecha Fin de Aclaratoria: </div>' +
 			formatearFecha(llamadoConcurso.fecha_fin_aclaratoria) +
 			'\n\
 			</div>\n\
-			<div class="col-sm-4"><div class="font-weight-bold">Fecha Tope: </div>' +
+			<div class="col-sm-4"><div class="font-weight-bold text-vinotinto">Fecha Tope: </div>' +
 			formatearFecha(llamadoConcurso.fecha_tope) +
 			'\n\
 			</div>\n\
@@ -3048,19 +3048,19 @@ var LlamadoConcurso = {
 	<div class="card-body">\n\
     <h5 class="card-title text-center bg-dark text-light">APERTURA DE SOBRES</h5>\n\
     <div class="row">\n\
-			<div class="col-6 col-sm-6 col-md-6 col-lg-2"><div class="font-weight-bold">Fecha de Entrega: </div>' +
+			<div class="col-6 col-sm-6 col-md-6 col-lg-2"><div class="font-weight-bold text-vinotinto">Fecha de Entrega: </div>' +
 			formatearFecha(llamadoConcurso.fecha_fin_llamado) +
 			'\n\
 			</div>\n\
-			<div class="col-6 col-sm-6 col-md-6 col-lg-2"><div class="font-weight-bold">Hora Desde: </div>' +
+			<div class="col-6 col-sm-6 col-md-6 col-lg-2"><div class="font-weight-bold text-vinotinto">Hora Desde: </div>' +
 			formatearHora(llamadoConcurso.hora_desde_sobre) +
 			'\n\
 			</div>\n\
-			<div class="col-sm-12 col-md-12 col-lg-8"><div class="font-weight-bold">Lugar de Entrega: </div>' +
+			<div class="col-sm-12 col-md-12 col-lg-8"><div class="font-weight-bold text-vinotinto">Lugar de Entrega: </div>' +
 			llamadoConcurso.lugar_entrega +
 			'\n\
 			</div>\n\
-			<div class="col-sm-12 col-md-12 col-lg-12"><div class="font-weight-bold">Dirección: </div>' +
+			<div class="col-sm-12 col-md-12 col-lg-12"><div class="font-weight-bold text-vinotinto">Dirección: </div>' +
 			llamadoConcurso.direccion_sobre +
 			", Municipio " +
 			llamadoConcurso.municipio_sobre +
@@ -3071,7 +3071,7 @@ var LlamadoConcurso = {
 			</div>\n\
 		</div>\n\
   </div>\n\
-  <div class="card-footer text-muted text-center">\n\
+  <div class="card-footer text-center bg-turquesa">\n\
     Estatus: ' +
 			llamadoConcurso.estatus +
 			"\n\

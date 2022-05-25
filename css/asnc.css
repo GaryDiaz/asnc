@@ -12,6 +12,15 @@
 	padding-bottom: 4px;
 }
 
+.bg-turquesa {
+	background-color: #01cdb2;
+	color: white;
+}
+
+.text-vinotinto {
+	color: #8b0600;
+}
+
 hr {
 	padding-top: 1px;
 	padding-bottom: 1px;
