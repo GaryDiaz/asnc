@@ -184,12 +184,13 @@ var sncApp = {
 		});
 	},
 	inicializarLlamadoConcurso: function () {
-		$.ajax({
-			url: "apirest/llamadoConcurso",
-			method: "GET",
-			success: function (json) {
-				LlamadoConcurso.mostrarTodos(json.datos);
-			},
+		LlamadoConcurso.cambioSltTipoFiltro();
+		$("#sltTipoFiltro").change(function () {
+			LlamadoConcurso.cambioSltTipoFiltro();
+		});
+		LlamadoConcurso.listar();
+		$("#btnFiltrarLlamados").click(function () {
+			LlamadoConcurso.filtrar();
 		});
 	},
 	inicializarRegistroLlamado: function () {

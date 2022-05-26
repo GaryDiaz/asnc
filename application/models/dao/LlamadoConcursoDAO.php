@@ -21,6 +21,36 @@ class LlamadoConcursoDAO extends \CI_Model {
     return $query->result();
   }
 
+  public function buscarPorRIF($rif) {
+    $query = $this->db->get_where(self::VW_NOMBRE, array('rif_organoente' => $rif));
+    return $query->result();
+  }
+
+  public function buscarPorNumeroProceso($numeroProceso) {
+    $query = $this->db->get_where(self::VW_NOMBRE, array('numero_proceso' => $numeroProceso));
+    return $query->result();
+  }
+
+  public function buscarPorTextoRIF($textoABuscar, $rif) {
+    $this->db->like('denominacion_proceso', $textoABuscar);
+    $this->db->or_like('descripcion_contratacion', $textoABuscar);
+    if ($rif) {
+      $this->db->where('rif_organoente', $rif);
+    }
+    $query = $this->db->get(self::VW_NOMBRE);
+    return $query->result();
+  }
+
+  public function buscarPorFecha($campoFecha, $desde, $hasta, $rif) {
+    $this->db->where($campoFecha . '>=', $desde);
+    $this->db->where($campoFecha . '<=', $hasta);
+    if ($rif) {
+      $this->db->where('rif_organoente', $rif);
+    }
+    $query = $this->db->get(self::VW_NOMBRE);
+    return $query->result();
+  }
+
   public function agregar($llamadoConcurso) {
     if ($this->buscar($llamadoConcurso['rif_organoente'], $llamadoConcurso['numero_proceso'])) {
       throw new \Exception('El número proceso ya exciste');

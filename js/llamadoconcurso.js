@@ -49,6 +49,41 @@ var LlamadoConcurso = {
 			alert("Debe revisar los datos antes de enviarlos");
 		}
 	},
+	buscarPorNumeroProceso: function (numeroProceso) {
+		let url = "apirest/llamadoConcurso/" + numeroProceso;
+		LlamadoConcurso.consultaAjax(url);
+	},
+	buscarPorFecha: function (tipoFecha, desde, hasta, propio) {
+		let x = propio ? 1 : 0;
+		let url =
+			"apirest/llamadoConcurso/" +
+			tipoFecha +
+			"/" +
+			desde +
+			"/" +
+			hasta +
+			"/" +
+			x;
+		LlamadoConcurso.consultaAjax(url);
+	},
+	buscarPorTexto: function (textoABuscar, propio) {
+		let x = propio ? 1 : 0;
+		let url = "apirest/llamadoConcurso/" + textoABuscar + "/" + x;
+		LlamadoConcurso.consultaAjax(url);
+	},
+	consultaAjax: function (url) {
+		$.ajax({
+			url: url,
+			method: "GET",
+			success: function (json) {
+				LlamadoConcurso.mostrarTodos(json.datos);
+				sncApp.enviarNotificacion(json.descripcion);
+			},
+			error: function (error) {
+				sncApp.notificarError(error);
+			},
+		});
+	},
 	cambioNumeroProceso: function () {
 		llamadoConcursoFrm.numero_proceso = $("#txtNumeroProceso").val();
 		if ($("#txtNumeroProceso").val() !== "") {
@@ -81,6 +116,42 @@ var LlamadoConcurso = {
 			$("#errObjetoContratacion").html("");
 		}
 		LlamadoConcurso.calcularLapsos();
+	},
+	cambioSltTipoFiltro: function () {
+		$("#chkPropio").prop("disabled", false);
+		switch ($("#sltTipoFiltro").val()) {
+			case "opcMostrarTodos":
+				$("#camposIdentificadores").hide();
+				$("#camposFechas").hide();
+				$("#camposTextos").hide();
+				break;
+			case "opcNumeroProceso":
+				$("#chkPropio").prop("disabled", true);
+				$("#chkPropio").prop("checked", false);
+				$("#txtNumeroProceso").val("");
+				$("#errNumeroProceso").html("");
+				$("#camposIdentificadores").show();
+				$("#camposFechas").hide();
+				$("#camposTextos").hide();
+				break;
+			case "opcFechaLlamado":
+			case "opcFechaFin":
+				$("#txtDesde").val("");
+				$("#errDesde").html("");
+				$("#txtHasta").val("");
+				$("#errHasta").html("");
+				$("#camposIdentificadores").hide();
+				$("#camposFechas").show();
+				$("#camposTextos").hide();
+				break;
+			case "opcTexto":
+				$("#txtTextoABuscar").val("");
+				$("#errTextoABuscar").html("");
+				$("#camposIdentificadores").hide();
+				$("#camposFechas").hide();
+				$("#camposTextos").show();
+				break;
+		}
 	},
 	cambioTxtFechaLlamado: function () {
 		let fecha = $("#txtFechaLlamado").val();
@@ -307,15 +378,82 @@ var LlamadoConcurso = {
 			});
 		}
 	},
+	filtrar: function () {
+		let propio = $("#chkPropio").is(":checked") ? true : false;
+		let desde;
+		let hasta;
+		let ok;
+		switch ($("#sltTipoFiltro").val()) {
+			case "opcMostrarTodos":
+				LlamadoConcurso.listar(propio);
+				break;
+			case "opcNumeroProceso":
+				let numeroProceso = $("#txtNumeroProceso").val();
+				if (numeroProceso !== "") {
+					LlamadoConcurso.buscarPorNumeroProceso(numeroProceso);
+				} else {
+					$("#errNumeroProceso").html(
+						"El campo número proceso no puede estar vacío"
+					);
+				}
+				break;
+			case "opcFechaLlamado":
+				desde = $("#txtDesde").val();
+				hasta = $("#txtHasta").val();
+				ok = true;
+				if (desde === "") {
+					ok = false;
+					$("#errDesde").html("Debe seleccionar una fecha");
+				}
+				if (hasta === "") {
+					ok = false;
+					$("#errHasta").html("Debe seleccionar una fecha");
+				}
+				if (ok) {
+					LlamadoConcurso.buscarPorFecha("fechaLlamado", desde, hasta, propio);
+				}
+				break;
+			case "opcFechaFin":
+				desde = $("#txtDesde").val();
+				hasta = $("#txtHasta").val();
+				ok = true;
+				if (desde === "") {
+					ok = false;
+					$("#errDesde").html("Debe seleccionar una fecha");
+				}
+				if (hasta === "") {
+					ok = false;
+					$("#errHasta").html("Debe seleccionar una fecha");
+				}
+				if (ok) {
+					LlamadoConcurso.buscarPorFecha("fechaFin", desde, hasta, propio);
+				}
+				break;
+			case "opcTexto":
+				let texto = $("#txtTextoABuscar").val();
+				if (texto !== "") {
+					LlamadoConcurso.buscarPorTexto(texto, propio);
+				} else {
+					$("#errTextoABuscar").html("El campo no puede estar vacío");
+				}
+				break;
+		}
+	},
+	listar: function (propio) {
+		let url = propio
+			? "apirest/llamadoConcursoPropio"
+			: "apirest/llamadoConcurso";
+		LlamadoConcurso.consultaAjax(url);
+	},
 	mostrarLlamado: function (llamadoConcurso) {
 		let salida = "";
 		salida +=
 			'\n\
 <div class="card shadow-sm p-3 mb-3">\n\
-  <div class="card-header text-center bg-turquesa">' +
+  <div class="card-header text-center bg-turquesa"> <i class="ion-ios-grid-view-outline"></i> Proceso: ' +
 			llamadoConcurso.numero_proceso +
-			" " +
-			llamadoConcurso.fecha_llamado +
+			' | <i class="ion-calendar"></i> Fecha de Llamado: ' +
+			formatearFecha(llamadoConcurso.fecha_llamado) +
 			'\n\
   </div>\n\
   <div class="card-body">\n\
@@ -463,9 +601,6 @@ var LlamadoConcurso = {
 		return salida;
 	},
 	mostrarTodos: function (list, contenedor) {
-		console.log("mostrarTodos");
-		console.log(list);
-
 		//(contenedor = undefined) ? "#resultadosLlamadoConcurso" : contenedor;
 		let salida = "";
 		$.each(list, function (i, llamadoConcurso) {

@@ -40,6 +40,10 @@ $route['frmLapso'] = 'Formulario/lapso';
 $route['apirest/calcularLapsos/(:any)/(:any)/(:num)/(:num)/(:num)']['get'] = 'LlamadoConcursoRest/calcular_lapsos/$1/$2/$3/$4/$5';
 $route['apirest/recalcularLapsos/(:any)/(:any)/(:any)']['get'] = 'LlamadoConcursoRest/recalcular_lapsos/$1/$2/$3';
 $route['apirest/llamadoConcurso']['get'] = 'LlamadoConcursoRest/buscar_todos';
+$route['apirest/llamadoConcursoPropio']['get'] = 'LlamadoConcursoRest/buscar_todos_propios';
+$route['apirest/llamadoConcurso/(:any)']['get'] = 'LlamadoConcursoRest/buscar_por_numero_proceso/$1';
+$route['apirest/llamadoConcurso/(:any)/(:num)']['get'] = 'LlamadoConcursoRest/buscar_por_texto/$1/$2';
+$route['apirest/llamadoConcurso/(:any)/(:any)/(:any)/(:num)']['get'] = 'LlamadoConcursoRest/buscar_por_fecha/$1/$2/$3/$4';
 $route['apirest/llamadoConcurso']['post'] = 'LlamadoConcursoRest/llamado_concurso';
 
 
