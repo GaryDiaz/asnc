@@ -20,7 +20,7 @@
             <button class="btn btn-light btn-lg" data-toggle="collapse" href="#opcionesFiltroLlamado" role="button" aria-expanded="false" aria-controls="opcionesOpcionesFiltroLlamado"><i class="ion-android-options"></i> Filtro</button>
           </li>
           <li class="nav-item">
-            <button class="btn btn-light btn-lg" href="<?= base_url() ?>index.php/regllamadoconcurso"><i class="ion-plus"></i> Registrar</button>
+            <a class="btn btn-light btn-lg" href="<?= base_url() ?>index.php/regllamadoconcurso"><i class="ion-plus"></i> Registrar</a>
           </li>
         </ul>
       </div>
