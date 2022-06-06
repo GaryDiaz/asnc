@@ -80,6 +80,7 @@ var LlamadoConcurso = {
 				sncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
+				$("#resultadosLlamadoConcurso").html("No hay resultados para mostrar");
 				sncApp.notificarError(error);
 			},
 		});

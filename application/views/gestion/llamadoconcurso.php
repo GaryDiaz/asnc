@@ -6,7 +6,6 @@
 ?>
 
 <div id="content" class="content">
-  <div id="areaDeNotificacion"></div>
   <div id="areaDeLlamadoConcurso">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <button class="btn btn-light btn-lg" data-toggle="tooltip" data-placement="bottom" title="Mostrar todos"><i class="ion-chatbox"></i> Llamado a Concurso</button>
@@ -19,9 +18,11 @@
           <li class="nav-item">
             <button class="btn btn-light btn-lg" data-toggle="collapse" href="#opcionesFiltroLlamado" role="button" aria-expanded="false" aria-controls="opcionesOpcionesFiltroLlamado"><i class="ion-android-options"></i> Filtro</button>
           </li>
-          <li class="nav-item">
-            <a class="btn btn-light btn-lg" href="<?= base_url() ?>index.php/regllamadoconcurso"><i class="ion-plus"></i> Registrar</a>
-          </li>
+          <?php if ($this->session->userdata('session')) { ?>
+            <li class="nav-item">
+              <a class="btn btn-light btn-lg" href="<?= base_url() ?>index.php/regllamadoconcurso"><i class="ion-plus"></i> Registrar</a>
+            </li>
+          <?php } ?>
         </ul>
       </div>
     </nav>
@@ -70,12 +71,14 @@
               <small id="errTextoABuscar" class="form-text text-danger"></small>
             </div>
           </div>
-          <div class="p-2 ml-auto bd-highlight">
-            <div class="form-group form-check">
-              <input type="checkbox" class="form-check-input" id="chkPropio">
-              <label class="form-check-label" for="chkPropio">Llamados Propios</label>
+          <?php if ($this->session->userdata('session')) { ?>
+            <div class="p-2 ml-auto bd-highlight">
+              <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="chkPropio">
+                <label class="form-check-label" for="chkPropio">Llamados Propios</label>
+              </div>
             </div>
-          </div>
+          <?php } ?>
           <div class="ml-auto p-2 bd-highlight"><button class="btn btn-primary btn-lg" id="btnFiltrarLlamados"><i class="ion-search"> </i>Filtrar</button></div>
         </div>
       </div>
@@ -87,8 +90,16 @@
         </div>
       </div>
     </div>
+    <div id="areaDeNotificacion"></div>
     <div id="resultadosLlamadoConcurso">
       No se ha encontrado ningún resultado
     </div>
   </div>
 </div>
+<?php if (!$this->session->userdata('session')) { ?>
+  <style>
+    .content {
+      margin-left: 0;
+    }
+  </style>
+<?php } ?>

@@ -45,10 +45,16 @@ class Gestion extends CI_Controller {
   }
 
   public function llamadoconcurso() {
-    $this->sesionIniciada();
-    $this->load->view('templates/header.php');
-    $this->load->view('templates/navigator.php');
-    $this->load->view('gestion/llamadoconcurso.php');
-    $this->load->view('templates/footer.php');
+    if (!$this->session->userdata('session')) {
+      $this->load->view('templates/header.php');
+      $this->load->view('templates/navsinsesion.php');
+      $this->load->view('gestion/llamadoconcurso.php');
+      $this->load->view('templates/footer.php');
+    } else {
+      $this->load->view('templates/header.php');
+      $this->load->view('templates/navigator.php');
+      $this->load->view('gestion/llamadoconcurso.php');
+      $this->load->view('templates/footer.php');
+    }
   }
 }
