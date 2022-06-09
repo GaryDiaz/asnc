@@ -94,6 +94,22 @@ class LlamadoConcursoRest extends RestController {
     }
   }
 
+  public function buscar_por_rif_y_numero_proceso_get($rif, $numeroProceso) {
+    try {
+      $this->load->model('dao/LlamadoConcursoDAO');
+      $res = $this->LlamadoConcursoDAO->buscar($rif, $numeroProceso);
+      if ($res) {
+        $data = new Mensaje("Llamado a concurso encontrado satisfactoriamente");
+        $data->setDato($res, "Llamado a concurso");
+        $this->response($data, self::HTTP_OK);
+      } else {
+        $this->response(new Mensaje("No se encontró el llamado a concurso especificado"), self::HTTP_BAD_REQUEST);
+      }
+    } catch (Exception $exc) {
+      $this->response(new Mensaje($exc->getMessage()), self::HTTP_BAD_REQUEST);
+    }
+  }
+
   public function buscar_por_texto_get($textoABuscar, $propio) {
     $rif = null;
     if ($propio) {
@@ -164,6 +180,23 @@ class LlamadoConcursoRest extends RestController {
       $rs = $this->LlamadoConcursoDAO->agregar($llamadoConcurso);
       if ($rs) {
         $data = new Mensaje("El llamado a concurso ha sido registrado satisfactoriamente");
+        $data->setDato($this->LlamadoConcursoDAO->buscar($llamadoConcurso['rif_organoente'], $llamadoConcurso['numero_proceso']));
+        $this->response($data, self::HTTP_OK);
+      } else {
+        $this->response(new Mensaje("No se pundo registrar el llamado a concurso"), self::HTTP_BAD_REQUEST);
+      }
+    } catch (Exception $exc) {
+      $this->response(new Mensaje($exc->getMessage()), RestController::HTTP_BAD_REQUEST);
+    }
+  }
+
+  public function llamado_concurso_put() {
+    try {
+      $llamadoConcurso = $this->_put_args;
+      $this->load->model('dao/LlamadoConcursoDAO');
+      $rs = $this->LlamadoConcursoDAO->editar($llamadoConcurso);
+      if ($rs) {
+        $data = new Mensaje("El llamado a concurso ha sido editado satisfactoriamente");
         $data->setDato($this->LlamadoConcursoDAO->buscar($llamadoConcurso['rif_organoente'], $llamadoConcurso['numero_proceso']));
         $this->response($data, self::HTTP_OK);
       } else {

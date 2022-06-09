@@ -12,6 +12,7 @@ $route['diasferiados'] = 'Gestion/dias_feriados';
 $route['gestionlapsos'] = 'Gestion/lapsos';
 $route['perfilinstitucional'] = 'Gestion/perfilinstitucional';
 $route['regllamadoconcurso']['get'] = 'Gestion/registrollamado';
+$route['editllamadoconcurso/(:any)']['get'] = 'Gestion/editarllamado/$1';
 $route['llamadoconcurso']['get'] = 'Gestion/llamadoconcurso';
 //******************************************************************************
 //******************************************************************************
@@ -42,9 +43,11 @@ $route['apirest/recalcularLapsos/(:any)/(:any)/(:any)']['get'] = 'LlamadoConcurs
 $route['apirest/llamadoConcurso']['get'] = 'LlamadoConcursoRest/buscar_todos';
 $route['apirest/llamadoConcursoPropio']['get'] = 'LlamadoConcursoRest/buscar_todos_propios';
 $route['apirest/llamadoConcurso/(:any)']['get'] = 'LlamadoConcursoRest/buscar_por_numero_proceso/$1';
+$route['apirest/llamadoConcurso/(:any)/(:any)']['get'] = 'LlamadoConcursoRest/buscar_por_rif_y_numero_proceso/$1/$2';
 $route['apirest/llamadoConcurso/(:any)/(:num)']['get'] = 'LlamadoConcursoRest/buscar_por_texto/$1/$2';
 $route['apirest/llamadoConcurso/(:any)/(:any)/(:any)/(:num)']['get'] = 'LlamadoConcursoRest/buscar_por_fecha/$1/$2/$3/$4';
 $route['apirest/llamadoConcurso']['post'] = 'LlamadoConcursoRest/llamado_concurso';
+$route['apirest/llamadoConcurso']['put'] = 'LlamadoConcursoRest/llamado_concurso';
 
 
 //******************************************************************************

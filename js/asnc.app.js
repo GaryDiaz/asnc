@@ -72,6 +72,12 @@ var sncApp = {
 			case "/regllamadoconcurso":
 				sncApp.inicializarRegistroLlamado();
 				break;
+			default:
+				let aURI = uri.split("/");
+				if (aURI[1] === "editllamadoconcurso") {
+					sncApp.inicializarEditarLlamado(aURI[2]);
+				}
+				break;
 		}
 	},
 	enviarNotificacion: function (descripcion, t, i, frm) {
@@ -191,6 +197,226 @@ var sncApp = {
 		LlamadoConcurso.listar();
 		$("#btnFiltrarLlamados").click(function () {
 			LlamadoConcurso.filtrar();
+		});
+	},
+	inicializarEditarLlamado: function (numeroProceso) {
+		let rif;
+		$.ajax({
+			url: "../apirest/miperfilinstitucionaldetalle",
+			method: "GET",
+			success: function (json) {
+				$("#txtRif").val(json.dato.rif);
+				dataLapsos.rif = json.dato.rif;
+				rif = json.dato.rif;
+				$("#txtSiglas").val(json.dato.siglas);
+				$("#txtDescripcion").val(json.dato.descripcion);
+				$("#txtDireccionOE").val(
+					json.dato.direccion +
+						", Municipio " +
+						json.dato.municipio +
+						", " +
+						json.dato.estado
+				);
+				$("#txtNumeroProceso").val(numeroProceso);
+				$.ajax({
+					url: "../apirest/llamadoConcurso/" + rif + "/" + numeroProceso,
+					success: function (jsonLL) {
+						let llc = jsonLL.dato;
+						$("#txtFechaLlamado").val(llc.fecha_llamado);
+						$("#txtDenominacionProceso").val(llc.denominacion_proceso);
+						$("#txtDescripcionContratacion").val(llc.descripcion_contratacion);
+						$.ajax({
+							url: "../apirest/modalidades",
+							success: function (json) {
+								let salida = "<option>[Modalidad]</option>\n";
+								$.each(json.datos, function (i, modalidad) {
+									salida +=
+										"<option value=" +
+										modalidad.id_modalidad +
+										">" +
+										modalidad.descripcion +
+										"</option>\n";
+								});
+								$("#sltModalidad").html(salida);
+								$("#sltModalidad").val(llc.id_modalidad);
+							},
+						});
+						$.ajax({
+							url: "../apirest/mecanismos",
+							success: function (json) {
+								let salida = "<option>[Mecanismo]</option>\n";
+								$.each(json.datos, function (i, mecanismo) {
+									salida +=
+										"<option value=" +
+										mecanismo.id_mecanismo +
+										">" +
+										mecanismo.descripcion +
+										"</option>\n";
+								});
+								$("#sltMecanismo").html(salida);
+								$("#sltMecanismo").val(llc.id_mecanismo);
+							},
+						});
+						$.ajax({
+							url: "../apirest/objetoscont",
+							success: function (json) {
+								let salida = "<option>[Objeto de Contratación]</option>\n";
+								$.each(json.datos, function (i, oc) {
+									salida +=
+										"<option value=" +
+										oc.id_objeto_contratacion +
+										">" +
+										oc.descripcion +
+										"</option>\n";
+								});
+								$("#sltObjetoContratacion").html(salida);
+								$("#sltObjetoContratacion").val(llc.id_objeto_contratacion);
+							},
+						});
+						$("#txtDiasHabiles").val(llc.dias_habiles);
+						$("#txtFechaDisponibleLlamado").val(llc.fecha_disponible_llamado);
+						$("#txtFechaFin").val(llc.fecha_fin_llamado);
+						$("#txtWebContratante").val(llc.web_contratante);
+						$("#txtHoraDesde").val(llc.hora_desde);
+						$("#txtHoraHasta").val(llc.hora_hasta);
+						$("#txtDireccion").val(llc.direccion);
+						$("#txtFechaInicioAclaratoria").val(llc.fecha_llamado);
+						$("#txtFechaFinAclaratoria").val(llc.fecha_fin_aclaratoria);
+						$("#txtFechaTope").val(llc.fecha_tope);
+						$("#txtFechaEntrega").val(llc.fecha_fin_llamado);
+						$("#txtHoraDesdeSobre").val(llc.hora_desde_sobre);
+						$("#txtDireccionSobre").val(llc.direccion_sobre);
+						$("#txtLugarEntrega").val(llc.lugar_entrega);
+						$.ajax({
+							url: "../apirest/estados",
+							success: function (json) {
+								let salida = "<option>[Estado]</option>\n";
+								$.each(json.datos, function (i, estado) {
+									salida +=
+										"<option value=" +
+										estado.id +
+										">" +
+										estado.descedo +
+										"</option>\n";
+								});
+								$("#sltEstado").html(salida);
+								$("#sltEstado").val(llc.id_estado);
+								$("#sltEstadoSobre").html(salida);
+								$("#sltEstadoSobre").val(llc.id_estado_sobre);
+								let mismoEstado =
+									llc.id_estado === llc.id_estado_sobre ? true : false;
+								$.ajax({
+									url: "../apirest/municipios/" + llc.id_estado,
+									success: function (jsonMun) {
+										let salida = "<option>[Municipio]</option>\n";
+										$.each(jsonMun.datos, function (i, municipio) {
+											salida +=
+												"<option value=" +
+												municipio.id +
+												">" +
+												municipio.descmun +
+												"</option>\n";
+										});
+										$("#sltMunicipio").html(salida);
+										$("#sltMunicipio").val(llc.id_municipio);
+										if (mismoEstado) {
+											$("#sltMunicipioSobre").html(salida);
+											$("#sltMunicipioSobre").val(llc.id_municipio_sobre);
+										}
+									},
+								});
+								if (!mismoEstado) {
+									$.ajax({
+										url: "../apirest/municipios/" + llc.id_estado_sobre,
+										success: function (jsonMun) {
+											let salida = "<option>[Municipio]</option>\n";
+											$.each(jsonMun.datos, function (i, municipio) {
+												salida +=
+													"<option value=" +
+													municipio.id +
+													">" +
+													municipio.descmun +
+													"</option>\n";
+											});
+											$("#sltMunicipioSobre").html(salida);
+											$("#sltMunicipioSobre").val(llc.id_municipio_sobre);
+										},
+									});
+								}
+								$("#txtNumeroProceso").change(function () {
+									LlamadoConcurso.cambioNumeroProceso();
+								});
+								$("#txtFechaLlamado").change(function () {
+									LlamadoConcurso.cambioTxtFechaLlamado();
+								});
+								$("#txtDenominacionProceso").change(function () {
+									LlamadoConcurso.cambioDenominacionProceso();
+								});
+								$("#txtDescripcionContratacion").change(function () {
+									LlamadoConcurso.cambioDescripcionContratacion();
+								});
+								$("#sltModalidad").change(function () {
+									LlamadoConcurso.cambioSltModalidad();
+								});
+								$("#sltMecanismo").change(function () {
+									LlamadoConcurso.cambioSltMecanismo();
+								});
+								$("#sltObjetoContratacion").change(function () {
+									LlamadoConcurso.cambioSltObjetoContratacion();
+								});
+								$("#txtFechaFin").change(function () {
+									LlamadoConcurso.cambioTxtFechaFin();
+								});
+								$("#txtFechaFinAclaratoria").change(function () {
+									LlamadoConcurso.cambioTxtFechaFinAclaratoria();
+								});
+								$("#txtWebContratante").change(function () {
+									LlamadoConcurso.cambioWebContratante();
+								});
+								$("#txtHoraDesde").change(function () {
+									LlamadoConcurso.cambioHoraDesde();
+								});
+								$("#txtHoraHasta").change(function () {
+									console.log("la hora hasta ha cambiado");
+									LlamadoConcurso.cambioHoraHasta();
+								});
+								$("#sltEstado").change(function () {
+									LlamadoConcurso.cambioEstado();
+								});
+								$("#sltMunicipio").change(function () {
+									LlamadoConcurso.cambioMunicipio();
+								});
+								$("#txtDireccion").change(function () {
+									console.log("la direccion cambio");
+									LlamadoConcurso.cambioDireccion();
+								});
+								$("#txtHoraDesdeSobre").change(function () {
+									LlamadoConcurso.cambioHoraDesdeSobre();
+								});
+								$("#sltEstadoSobre").change(function () {
+									LlamadoConcurso.cambioEstadoSobre();
+								});
+								$("#sltMunicipioSobre").change(function () {
+									LlamadoConcurso.cambioMunicipioSobre();
+								});
+								$("#txtDireccionSobre").change(function () {
+									LlamadoConcurso.cambioDireccionSobre();
+								});
+								$("#txtLugarEntrega").change(function () {
+									LlamadoConcurso.cambioLugarEntrega();
+								});
+								$("#txtObservaciones").change(function () {
+									LlamadoConcurso.cambioObservaciones();
+								});
+								$("#btnGuardar").click(function () {
+									LlamadoConcurso.editar();
+								});
+								LlamadoConcurso.datosForm(llc);
+							},
+						});
+					},
+				});
+			},
 		});
 	},
 	inicializarRegistroLlamado: function () {

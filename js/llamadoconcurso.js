@@ -64,19 +64,19 @@ var LlamadoConcurso = {
 			hasta +
 			"/" +
 			x;
-		LlamadoConcurso.consultaAjax(url);
+		LlamadoConcurso.consultaAjax(url, propio);
 	},
 	buscarPorTexto: function (textoABuscar, propio) {
 		let x = propio ? 1 : 0;
 		let url = "apirest/llamadoConcurso/" + textoABuscar + "/" + x;
-		LlamadoConcurso.consultaAjax(url);
+		LlamadoConcurso.consultaAjax(url, propio);
 	},
-	consultaAjax: function (url) {
+	consultaAjax: function (url, propio) {
 		$.ajax({
 			url: url,
 			method: "GET",
 			success: function (json) {
-				LlamadoConcurso.mostrarTodos(json.datos);
+				LlamadoConcurso.mostrarTodos(json.datos, propio);
 				sncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
@@ -320,6 +320,12 @@ var LlamadoConcurso = {
 			$("#errMunicipioSobre").html("");
 		}
 	},
+	cambioObservaciones: function () {
+		llamadoConcursoFrm.observaciones = $("#txtObservaciones").val();
+		if ($("#txtObservaciones").val() !== "") {
+			$("#errObservaciones").html("");
+		}
+	},
 	cambioDireccionSobre: function () {
 		llamadoConcursoFrm.direccion_sobre = $("#txtDireccionSobre").val();
 		if ($("#txtDireccionSobre").val() !== "") {
@@ -377,6 +383,56 @@ var LlamadoConcurso = {
 					);
 				},
 			});
+		}
+	},
+	datosForm: function (llamadoConcurso) {
+		llamadoConcursoFrm.rif_organoente = llamadoConcurso.rif_organoente;
+		llamadoConcursoFrm.numero_proceso = llamadoConcurso.numero_proceso;
+		llamadoConcursoFrm.id_modalidad = llamadoConcurso.id_modalidad;
+		llamadoConcursoFrm.id_mecanismo = llamadoConcurso.id_mecanismo;
+		llamadoConcursoFrm.id_objeto_contratacion =
+			llamadoConcurso.id_objeto_contratacion;
+		llamadoConcursoFrm.dias_habiles = llamadoConcurso.dias_habiles;
+		llamadoConcursoFrm.fecha_llamado = llamadoConcurso.fecha_llamado;
+		llamadoConcursoFrm.fecha_disponible_llamado =
+			llamadoConcurso.fecha_disponible_llamado;
+		llamadoConcursoFrm.fecha_fin_aclaratoria =
+			llamadoConcurso.fecha_fin_aclaratoria;
+		llamadoConcursoFrm.fecha_tope = llamadoConcurso.fecha_tope;
+		llamadoConcursoFrm.fecha_fin_llamado = llamadoConcurso.fecha_fin_llamado;
+		llamadoConcursoFrm.denominacion_proceso =
+			llamadoConcurso.denominacion_proceso;
+		llamadoConcursoFrm.descripcion_contratacion =
+			llamadoConcurso.descripcion_contratacion;
+		llamadoConcursoFrm.web_contratante = llamadoConcurso.web_contratante;
+		llamadoConcursoFrm.hora_desde = llamadoConcurso.hora_desde;
+		llamadoConcursoFrm.hora_hasta = llamadoConcurso.hora_hasta;
+		llamadoConcursoFrm.id_estado = llamadoConcurso.id_estado;
+		llamadoConcursoFrm.id_municipio = llamadoConcurso.id_municipio;
+		llamadoConcursoFrm.direccion = llamadoConcurso.direccion;
+		llamadoConcursoFrm.hora_desde_sobre = llamadoConcurso.hora_desde_sobre;
+		llamadoConcursoFrm.id_estado_sobre = llamadoConcurso.id_estado_sobre;
+		llamadoConcursoFrm.id_municipio_sobre = llamadoConcurso.id_municipio_sobre;
+		llamadoConcursoFrm.direccion_sobre = llamadoConcurso.direccion_sobre;
+		llamadoConcursoFrm.lugar_entrega = llamadoConcurso.lugar_entrega;
+		llamadoConcursoFrm.observaciones = llamadoConcurso.observaciones;
+		llamadoConcursoFrm.estatus = llamadoConcurso.estatus;
+	},
+	editar: function () {
+		if (LlamadoConcurso.validarDatos()) {
+			$.ajax({
+				url: "../apirest/llamadoConcurso",
+				method: "PUT",
+				data: llamadoConcursoFrm,
+				success: function (json) {
+					alert(json.descripcion);
+				},
+				error: function (error) {
+					sncApp.notificarError(error);
+				},
+			});
+		} else {
+			alert("Debe revisar los datos antes de enviarlos");
 		}
 	},
 	filtrar: function () {
@@ -444,9 +500,18 @@ var LlamadoConcurso = {
 		let url = propio
 			? "apirest/llamadoConcursoPropio"
 			: "apirest/llamadoConcurso";
-		LlamadoConcurso.consultaAjax(url);
+		LlamadoConcurso.consultaAjax(url, propio);
 	},
-	mostrarLlamado: function (llamadoConcurso) {
+	mostrarLlamado: function (llamadoConcurso, propio) {
+		let estatus =
+			llamadoConcurso.estatus === "Iniciado" && propio
+				? '<a href="editllamadoconcurso/' +
+				  llamadoConcurso.numero_proceso +
+				  '" class="btn btn-info">Editar Llamado</a> | \n\
+		Estatus: ' +
+				  llamadoConcurso.estatus +
+				  "\n"
+				: "Estatus: " + llamadoConcurso.estatus + "\n";
 		let salida = "";
 		salida +=
 			'\n\
@@ -593,19 +658,19 @@ var LlamadoConcurso = {
 			</div>\n\
 		</div>\n\
   </div>\n\
-  <div class="card-footer text-center bg-turquesa">\n\
-    Estatus: ' +
-			llamadoConcurso.estatus +
+	<div class="card-footer text-center bg-turquesa">\n\
+    ' +
+			estatus +
 			"\n\
   </div>\n\
 </div>";
 		return salida;
 	},
-	mostrarTodos: function (list, contenedor) {
+	mostrarTodos: function (list, propio) {
 		//(contenedor = undefined) ? "#resultadosLlamadoConcurso" : contenedor;
 		let salida = "";
 		$.each(list, function (i, llamadoConcurso) {
-			salida += LlamadoConcurso.mostrarLlamado(llamadoConcurso);
+			salida += LlamadoConcurso.mostrarLlamado(llamadoConcurso, propio);
 		});
 		$("#resultadosLlamadoConcurso").html(salida);
 	},

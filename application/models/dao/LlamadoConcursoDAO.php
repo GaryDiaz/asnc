@@ -13,7 +13,7 @@ class LlamadoConcursoDAO extends \CI_Model {
     $this->db->where('rif_organoente', $rif);
     $this->db->where('numero_proceso', $numeroProceso);
     $query = $this->db->get(self::VW_NOMBRE);
-    return $query->result();
+    return $query->row();
   }
 
   public function buscarTodos() {
