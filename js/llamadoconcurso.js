@@ -385,43 +385,40 @@ var LlamadoConcurso = {
 			});
 		}
 	},
-	datosForm: function (llamadoConcurso) {
-		llamadoConcursoFrm.rif_organoente = llamadoConcurso.rif_organoente;
-		llamadoConcursoFrm.numero_proceso = llamadoConcurso.numero_proceso;
-		llamadoConcursoFrm.id_modalidad = llamadoConcurso.id_modalidad;
-		llamadoConcursoFrm.id_mecanismo = llamadoConcurso.id_mecanismo;
-		llamadoConcursoFrm.id_objeto_contratacion =
-			llamadoConcurso.id_objeto_contratacion;
-		llamadoConcursoFrm.dias_habiles = llamadoConcurso.dias_habiles;
-		llamadoConcursoFrm.fecha_llamado = llamadoConcurso.fecha_llamado;
-		llamadoConcursoFrm.fecha_disponible_llamado =
-			llamadoConcurso.fecha_disponible_llamado;
-		llamadoConcursoFrm.fecha_fin_aclaratoria =
-			llamadoConcurso.fecha_fin_aclaratoria;
-		llamadoConcursoFrm.fecha_tope = llamadoConcurso.fecha_tope;
-		llamadoConcursoFrm.fecha_fin_llamado = llamadoConcurso.fecha_fin_llamado;
-		llamadoConcursoFrm.denominacion_proceso =
-			llamadoConcurso.denominacion_proceso;
-		llamadoConcursoFrm.descripcion_contratacion =
-			llamadoConcurso.descripcion_contratacion;
-		llamadoConcursoFrm.web_contratante = llamadoConcurso.web_contratante;
-		llamadoConcursoFrm.hora_desde = llamadoConcurso.hora_desde;
-		llamadoConcursoFrm.hora_hasta = llamadoConcurso.hora_hasta;
-		llamadoConcursoFrm.id_estado = llamadoConcurso.id_estado;
-		llamadoConcursoFrm.id_municipio = llamadoConcurso.id_municipio;
-		llamadoConcursoFrm.direccion = llamadoConcurso.direccion;
-		llamadoConcursoFrm.hora_desde_sobre = llamadoConcurso.hora_desde_sobre;
-		llamadoConcursoFrm.id_estado_sobre = llamadoConcurso.id_estado_sobre;
-		llamadoConcursoFrm.id_municipio_sobre = llamadoConcurso.id_municipio_sobre;
-		llamadoConcursoFrm.direccion_sobre = llamadoConcurso.direccion_sobre;
-		llamadoConcursoFrm.lugar_entrega = llamadoConcurso.lugar_entrega;
-		llamadoConcursoFrm.observaciones = llamadoConcurso.observaciones;
-		llamadoConcursoFrm.estatus = llamadoConcurso.estatus;
+	datosEdicion: function (llamadoConcurso) {
+		llamadoConcursoFrm = {
+			id_modalidad: llamadoConcurso.id_modalidad,
+			id_mecanismo: llamadoConcurso.id_mecanismo,
+			id_objeto_contratacion: llamadoConcurso.id_objeto_contratacion,
+			dias_habiles: llamadoConcurso.dias_habiles,
+			fecha_llamado: llamadoConcurso.fecha_llamado,
+			fecha_disponible_llamado: llamadoConcurso.fecha_disponible_llamado,
+			fecha_fin_aclaratoria: llamadoConcurso.fecha_fin_aclaratoria,
+			fecha_tope: llamadoConcurso.fecha_tope,
+			fecha_fin_llamado: llamadoConcurso.fecha_fin_llamado,
+			denominacion_proceso: llamadoConcurso.denominacion_proceso,
+			descripcion_contratacion: llamadoConcurso.descripcion_contratacion,
+			web_contratante: llamadoConcurso.web_contratante,
+			hora_desde: llamadoConcurso.hora_desde,
+			hora_hasta: llamadoConcurso.hora_hasta,
+			id_estado: llamadoConcurso.id_estado,
+			id_municipio: llamadoConcurso.id_municipio,
+			direccion: llamadoConcurso.direccion,
+			hora_desde_sobre: llamadoConcurso.hora_desde_sobre,
+			id_estado_sobre: llamadoConcurso.id_estado_sobre,
+			id_municipio_sobre: llamadoConcurso.id_municipio_sobre,
+			direccion_sobre: llamadoConcurso.direccion_sobre,
+			lugar_entrega: llamadoConcurso.lugar_entrega,
+			observaciones: llamadoConcurso.observaciones,
+			estatus: llamadoConcurso.estatus,
+		};
 	},
 	editar: function () {
 		if (LlamadoConcurso.validarDatos()) {
+			let rif = $("#txtRif").val();
+			let numeroProceso = $("#txtNumeroProceso").val();
 			$.ajax({
-				url: "../apirest/llamadoConcurso",
+				url: "../apirest/llamadoConcurso/" + rif + "/" + numeroProceso,
 				method: "PUT",
 				data: llamadoConcursoFrm,
 				success: function (json) {

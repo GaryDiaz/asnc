@@ -59,6 +59,17 @@ class LlamadoConcursoDAO extends \CI_Model {
     }
   }
 
+  public function editar($rif, $numero_proceso, $llc) {
+    if ($this->buscar($rif, $numero_proceso)) {
+      throw new \Exception('El número proceso ya exciste');
+    } else {
+      $this->db->set($llc);
+      $this->db->where("rif_organoente", $rif);
+      $this->db->where("numero_proceso", $numero_proceso);
+      return $this->db->update(self::TB_NOMBRE);
+    }
+  }
+
   public function calcularLapsos($fechaLlamado, int $diasHabiles, array $feriados) {
     $fechaDisponibleLlamado = null;
     $fechaFinAclaratoria = null;

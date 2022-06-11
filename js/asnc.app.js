@@ -343,9 +343,6 @@ var sncApp = {
 										},
 									});
 								}
-								$("#txtNumeroProceso").change(function () {
-									LlamadoConcurso.cambioNumeroProceso();
-								});
 								$("#txtFechaLlamado").change(function () {
 									LlamadoConcurso.cambioTxtFechaLlamado();
 								});
@@ -411,7 +408,7 @@ var sncApp = {
 								$("#btnGuardar").click(function () {
 									LlamadoConcurso.editar();
 								});
-								LlamadoConcurso.datosForm(llc);
+								LlamadoConcurso.datosEdicion(llc);
 							},
 						});
 					},

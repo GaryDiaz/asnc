@@ -190,17 +190,17 @@ class LlamadoConcursoRest extends RestController {
     }
   }
 
-  public function llamado_concurso_put() {
+  public function llamado_concurso_put($rif, $numero_proceso) {
     try {
-      $llamadoConcurso = $this->_put_args;
+      $llc = $this->_put_args;
       $this->load->model('dao/LlamadoConcursoDAO');
-      $rs = $this->LlamadoConcursoDAO->editar($llamadoConcurso);
+      $rs = $this->LlamadoConcursoDAO->editar($rif, $numero_proceso, $llc);
       if ($rs) {
         $data = new Mensaje("El llamado a concurso ha sido editado satisfactoriamente");
-        $data->setDato($this->LlamadoConcursoDAO->buscar($llamadoConcurso['rif_organoente'], $llamadoConcurso['numero_proceso']));
+        $data->setDato($this->LlamadoConcursoDAO->buscar($rif, $numero_proceso));
         $this->response($data, self::HTTP_OK);
       } else {
-        $this->response(new Mensaje("No se pundo registrar el llamado a concurso"), self::HTTP_BAD_REQUEST);
+        $this->response(new Mensaje("No se pudo registrar el llamado a concurso"), self::HTTP_BAD_REQUEST);
       }
     } catch (Exception $exc) {
       $this->response(new Mensaje($exc->getMessage()), RestController::HTTP_BAD_REQUEST);
