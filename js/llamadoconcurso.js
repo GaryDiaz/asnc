@@ -40,6 +40,10 @@ var LlamadoConcurso = {
 				data: llamadoConcursoFrm,
 				success: function (json) {
 					alert(json.descripcion);
+					sncApp.enviarNotificacion(json.descripcion);
+					let salida = LlamadoConcurso.mostrarLlamado(json.dato);
+					$("#areaLlamadoConcurso").html(salida);
+					history.pushState(null, "", "llamadoconcurso");
 				},
 				error: function (error) {
 					sncApp.notificarError(error);
@@ -48,6 +52,21 @@ var LlamadoConcurso = {
 		} else {
 			alert("Debe revisar los datos antes de enviarlos");
 		}
+	},
+	buscar: function (rif, numeroProceso, idElemento) {
+		let url = "apirest/llamadoConcurso/" + rif + "/" + numeroProceso;
+		$.ajax({
+			url: url,
+			method: "GET",
+			success: function (json) {
+				let salida = LlamadoConcurso.mostrarLlamado(json.dato);
+				$("#" + idElemento).html(salida);
+			},
+			error: function (error) {
+				$("#resultadosLlamadoConcurso").html("No hay resultados para mostrar");
+				sncApp.notificarError(error);
+			},
+		});
 	},
 	buscarPorNumeroProceso: function (numeroProceso) {
 		let url = "apirest/llamadoConcurso/" + numeroProceso;
@@ -422,7 +441,10 @@ var LlamadoConcurso = {
 				method: "PUT",
 				data: llamadoConcursoFrm,
 				success: function (json) {
-					alert(json.descripcion);
+					sncApp.enviarNotificacion(json.descripcion);
+					let salida = LlamadoConcurso.mostrarLlamado(json.dato);
+					$("#areaLlamadoConcurso").html(salida);
+					history.pushState(null, "", "../llamadoconcurso");
 				},
 				error: function (error) {
 					sncApp.notificarError(error);
