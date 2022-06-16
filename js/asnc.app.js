@@ -19,8 +19,10 @@ var meses = [
 	"noviembre",
 	"diciembre",
 ];
-var estados;
-var paginas, paginaActual;
+var estados,
+	paginas,
+	paginaActual,
+	itemsPorPagina = 3;
 function formatearFecha(txtFecha) {
 	let arrayFecha = txtFecha.split("-");
 	//return (fecha.getDay()+1)+' de '+ meses[fecha.getMonth()-1]+' de '+fecha.getFullYear();

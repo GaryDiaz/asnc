@@ -770,8 +770,8 @@ var LlamadoConcurso = {
 		}
 		let salida = menuPaginacion;
 		for (
-			let i = pagina * 2 - 2;
-			i <= pagina * 2 - 1 && i <= llcList.length - 1;
+			let i = pagina * itemsPorPagina - itemsPorPagina;
+			i <= pagina * itemsPorPagina - 1 && i <= llcList.length - 1;
 			i++
 		) {
 			console.log("Item: " + i);
@@ -786,7 +786,9 @@ var LlamadoConcurso = {
 		llcList = list;
 		propio = p;
 		paginas =
-			list.length % 2 ? Math.trunc(list.length / 2) + 1 : list.length / 2;
+			list.length % itemsPorPagina
+				? Math.trunc(list.length / itemsPorPagina) + 1
+				: list.length / itemsPorPagina;
 		paginaActual = 1;
 		LlamadoConcurso.mostrarPagina(1);
 	},
