@@ -2,7 +2,7 @@
 <div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
   <div id="header" class="header navbar-default">
     <div class="navbar-header">
-      <a href="index.html" class="navbar-brand"><span class="navbar-logo"><i style="color:darkred" class="fas fa-briefcase"></i></span> <b>Sistema Integrado</b> SNC</a>
+      <a href="." class="navbar-brand"><span class="navbar-logo"><i style="color:darkred" class="fas fa-briefcase"></i></span> <b>Sistema Integrado</b> SNC</a>
       <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>

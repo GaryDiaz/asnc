@@ -20,6 +20,7 @@ var meses = [
 	"diciembre",
 ];
 var estados;
+var paginas, paginaActual;
 function formatearFecha(txtFecha) {
 	let arrayFecha = txtFecha.split("-");
 	//return (fecha.getDay()+1)+' de '+ meses[fecha.getMonth()-1]+' de '+fecha.getFullYear();
@@ -47,6 +48,15 @@ function formatearHora(txtHora) {
 	}
 	//return (fecha.getDay()+1)+' de '+ meses[fecha.getMonth()-1]+' de '+fecha.getFullYear();
 	return hora + ":" + minuto + " " + meridian;
+}
+
+function irArriba() {
+	$("body, html").animate(
+		{
+			scrollTop: "0px",
+		},
+		300
+	);
 }
 
 /**
@@ -344,7 +354,7 @@ var sncApp = {
 									});
 								}
 								$("#txtFechaLlamado").change(function () {
-									LlamadoConcurso.cambioTxtFechaLlamado();
+									LlamadoConcurso.cambioTxtFechaLlamado(true);
 								});
 								$("#txtDenominacionProceso").change(function () {
 									LlamadoConcurso.cambioDenominacionProceso();
@@ -353,16 +363,16 @@ var sncApp = {
 									LlamadoConcurso.cambioDescripcionContratacion();
 								});
 								$("#sltModalidad").change(function () {
-									LlamadoConcurso.cambioSltModalidad();
+									LlamadoConcurso.cambioSltModalidad(true);
 								});
 								$("#sltMecanismo").change(function () {
-									LlamadoConcurso.cambioSltMecanismo();
+									LlamadoConcurso.cambioSltMecanismo(true);
 								});
 								$("#sltObjetoContratacion").change(function () {
-									LlamadoConcurso.cambioSltObjetoContratacion();
+									LlamadoConcurso.cambioSltObjetoContratacion(true);
 								});
 								$("#txtFechaFin").change(function () {
-									LlamadoConcurso.cambioTxtFechaFin();
+									LlamadoConcurso.cambioTxtFechaFin(true);
 								});
 								$("#txtFechaFinAclaratoria").change(function () {
 									LlamadoConcurso.cambioTxtFechaFinAclaratoria();
@@ -411,6 +421,18 @@ var sncApp = {
 								LlamadoConcurso.datosEdicion(llc);
 							},
 						});
+						dataLapsos.fechallamado = llc.fecha_llamado;
+						dataLapsos.id_modalidad = llc.id_modalidad;
+						dataLapsos.id_mecanismo = llc.id_mecanismo;
+						dataLapsos.id_objeto_contratacion = llc.id_objeto_contratacion;
+						lapsosFechas = {
+							dias_habiles: llc.dias_habiles,
+							fecha_disponible_llamado: llc.fecha_disponible_llamado,
+							fecha_fin_aclaratoria: llc.fecha_fin_aclaratoria,
+							fecha_fin_llamado: llc.fecha_fin_llamado,
+							fecha_llamado: llc.fecha_llamado,
+							fecha_tope: llc.fecha_tope,
+						};
 					},
 				});
 			},

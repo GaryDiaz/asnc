@@ -72,7 +72,7 @@ $captcha_numbers = array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
         <!-- <img style="background-repeat: no-repeat;" src="<?= base_url() ?>Plantilla/img/2.png" alt=""> -->
       </div>
       <div class="right-content" style="padding-top:4%">
-        <a href="llamadoconcurso" class="btn btn-light btn-lg btn-block">Llamado a concurso</a>
+        <a href="<?= base_url() ?>index.php/llamadoconcurso" class="btn btn-light btn-lg btn-block">Llamado a concurso</a>
         <div class="login-header">
           <div class="brand  text-center">
             <span class="logo">

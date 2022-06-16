@@ -31,6 +31,9 @@ var llamadoConcursoFrm = {
 	estatus: "",
 };
 
+var llcList;
+var propio;
+
 var LlamadoConcurso = {
 	agregar: function () {
 		if (LlamadoConcurso.validarDatos()) {
@@ -110,32 +113,32 @@ var LlamadoConcurso = {
 			$("#errNumeroProceso").html("");
 		}
 	},
-	cambioSltModalidad: function () {
+	cambioSltModalidad: function (modoEdicion = false) {
 		let id = $("#sltModalidad").val();
 		dataLapsos.id_modalidad = id;
 		llamadoConcursoFrm.id_modalidad = id;
 		if (id) {
 			$("#errModalidad").html("");
 		}
-		LlamadoConcurso.calcularLapsos();
+		LlamadoConcurso.calcularLapsos(modoEdicion);
 	},
-	cambioSltMecanismo: function () {
+	cambioSltMecanismo: function (modoEdicion = false) {
 		let id = $("#sltMecanismo").val();
 		dataLapsos.id_mecanismo = id;
 		llamadoConcursoFrm.id_mecanismo = id;
 		if (id) {
 			$("#errMecanismo").html("");
 		}
-		LlamadoConcurso.calcularLapsos();
+		LlamadoConcurso.calcularLapsos(modoEdicion);
 	},
-	cambioSltObjetoContratacion: function () {
+	cambioSltObjetoContratacion: function (modoEdicion = false) {
 		let id = $("#sltObjetoContratacion").val();
 		dataLapsos.id_objeto_contratacion = id;
 		llamadoConcursoFrm.id_objeto_contratacion = id;
 		if (id) {
 			$("#errObjetoContratacion").html("");
 		}
-		LlamadoConcurso.calcularLapsos();
+		LlamadoConcurso.calcularLapsos(modoEdicion);
 	},
 	cambioSltTipoFiltro: function () {
 		$("#chkPropio").prop("disabled", false);
@@ -173,16 +176,16 @@ var LlamadoConcurso = {
 				break;
 		}
 	},
-	cambioTxtFechaLlamado: function () {
+	cambioTxtFechaLlamado: function (modoEdicion = false) {
 		let fecha = $("#txtFechaLlamado").val();
 		dataLapsos.fechallamado = fecha;
 		llamadoConcursoFrm.fecha_llamado = fecha;
 		if (fecha !== "") {
 			$("#errFechaLlamado").html("");
 		}
-		LlamadoConcurso.calcularLapsos();
+		LlamadoConcurso.calcularLapsos(modoEdicion);
 	},
-	cambioTxtFechaFin: function () {
+	cambioTxtFechaFin: function (modoEdicion = false) {
 		let fechaFin = $("#txtFechaFin").val();
 		let fchNueva = new Date(fechaFin);
 		let fchLapso = new Date(lapsosFechas.fecha_fin_llamado);
@@ -190,9 +193,11 @@ var LlamadoConcurso = {
 			$("#errFechaFin").prop("hidden", false);
 		} else {
 			$("#errFechaFin").prop("hidden", true);
+			let apirest = modoEdicion ? "../apirest" : "apirest";
 			$.ajax({
 				url:
-					"apirest/recalcularLapsos/" +
+					apirest +
+					"/recalcularLapsos/" +
 					dataLapsos.rif +
 					"/" +
 					dataLapsos.fechallamado +
@@ -357,16 +362,18 @@ var LlamadoConcurso = {
 			$("#errLugarEntrega").html("");
 		}
 	},
-	calcularLapsos: function () {
+	calcularLapsos: function (modoEdicion = false) {
 		if (
 			dataLapsos.fechallamado !== "" &&
 			dataLapsos.id_modalidad > 0 &&
 			dataLapsos.id_mecanismo > 0 &&
 			dataLapsos.id_objeto_contratacion > 0
 		) {
+			let apirest = modoEdicion ? "../apirest" : "apirest";
 			$.ajax({
 				url:
-					"apirest/calcularLapsos/" +
+					apirest +
+					"/calcularLapsos/" +
 					dataLapsos.rif +
 					"/" +
 					dataLapsos.fechallamado +
@@ -531,6 +538,16 @@ var LlamadoConcurso = {
 				  llamadoConcurso.estatus +
 				  "\n"
 				: "Estatus: " + llamadoConcurso.estatus + "\n";
+		let observaciones =
+			llamadoConcurso.observaciones.length > 0
+				? '<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 border border-danger">\n\
+						<div class="font-weight-bold text-vinotinto">Observaciones:</div>\n\
+						<div class="text-vinotinto">' +
+				  llamadoConcurso.observaciones +
+				  "\n\
+						</div>\n\
+					</div>\n"
+				: "";
 		let salida = "";
 		salida +=
 			'\n\
@@ -558,9 +575,10 @@ var LlamadoConcurso = {
 			</div>\n\
 			<div class="col-sm-8 col-md-8 col-lg-9 col-xl-10"><div class="font-weight-bold text-vinotinto">Descripción de Contratación: </div>' +
 			llamadoConcurso.descripcion_contratacion +
-			'\n\
-			</div>\n\
-		</div>\n\
+			"\n\
+			</div>\n" +
+			observaciones +
+			'</div>\n\
   </div>\n\
 	<div class="card-body">\n\
     <h5 class="card-title text-center bg-dark text-light">DATOS DEL ÓRGANO O ENTE</h5>\n\
@@ -685,13 +703,92 @@ var LlamadoConcurso = {
 </div>";
 		return salida;
 	},
-	mostrarTodos: function (list, propio) {
-		//(contenedor = undefined) ? "#resultadosLlamadoConcurso" : contenedor;
-		let salida = "";
-		$.each(list, function (i, llamadoConcurso) {
-			salida += LlamadoConcurso.mostrarLlamado(llamadoConcurso, propio);
-		});
+	mostrarPagina: function (pagina) {
+		let inicio = 1;
+		let fin = paginas;
+		if (paginas > 7) {
+			if (pagina >= 4) {
+				inicio = pagina - 3;
+			}
+			if (pagina + 3 < paginas) {
+				fin = pagina + 3;
+			}
+		}
+		let menuPaginacion = "";
+		if (paginas > 1) {
+			let paginaAnterior = pagina - 1;
+			let paginaSiguiente = pagina + 1 > paginas ? 0 : pagina + 1;
+			paginaActual = 1;
+			console.log(
+				"paginaAnterior: " +
+					paginaAnterior +
+					", pagina: " +
+					pagina +
+					", paginaSiguiente: " +
+					paginaSiguiente
+			);
+			menuPaginacion =
+				'<nav aria-label="Page navigation example">\n\
+					<ul class="pagination justify-content-center">';
+			if (paginaAnterior) {
+				menuPaginacion +=
+					'		<li class="page-item">\n\
+							<button class="btn btn-light border" onclick="LlamadoConcurso.mostrarPagina(' +
+					paginaAnterior +
+					')">\n\
+								<i class="ion-chevron-left"></i>\n\
+							</button>\n\
+						</li>\n';
+			}
+			for (let i = inicio; i <= fin; i++) {
+				if (i === pagina) {
+					menuPaginacion +=
+						'<li class="page-item"><button class="btn btn-outline-dark border rounded-circle active">' +
+						i +
+						"</button></li>\n";
+				} else {
+					menuPaginacion +=
+						'<li class="page-item"><button class="btn btn-light border rounded-circle" onclick="LlamadoConcurso.mostrarPagina(' +
+						i +
+						')">' +
+						i +
+						"</button></li>\n";
+				}
+			}
+			if (paginaSiguiente) {
+				menuPaginacion +=
+					'	<li class="page-item">\n\
+						<button class="btn btn-light border" onclick="LlamadoConcurso.mostrarPagina(' +
+					paginaSiguiente +
+					')">\n\
+							<i class="ion-chevron-right"></i>\n\
+						</button>\n\
+					</li>\n';
+			}
+			menuPaginacion += "	</ul>\n\
+				</nav>\n\n";
+		}
+		let salida = menuPaginacion;
+		for (
+			let i = pagina * 2 - 2;
+			i <= pagina * 2 - 1 && i <= llcList.length - 1;
+			i++
+		) {
+			console.log("Item: " + i);
+			salida += LlamadoConcurso.mostrarLlamado(llcList[i], propio);
+		}
+		salida += menuPaginacion;
 		$("#resultadosLlamadoConcurso").html(salida);
+		irArriba();
+	},
+	mostrarTodos: function (list, p) {
+		//(contenedor = undefined) ? "#resultadosLlamadoConcurso" : contenedor;
+		llcList = list;
+		propio = p;
+		paginas =
+			list.length % 2 ? Math.trunc(list.length / 2) + 1 : list.length / 2;
+		paginaActual = 1;
+		LlamadoConcurso.mostrarPagina(1);
 	},
 	validarDatos: function () {
 		let ok = true;
