@@ -48,6 +48,7 @@ $route['apirest/llamadoConcurso/(:any)/(:num)']['get'] = 'LlamadoConcursoRest/bu
 $route['apirest/llamadoConcurso/(:any)/(:any)/(:any)/(:num)']['get'] = 'LlamadoConcursoRest/buscar_por_fecha/$1/$2/$3/$4';
 $route['apirest/llamadoConcurso']['post'] = 'LlamadoConcursoRest/llamado_concurso';
 $route['apirest/llamadoConcurso/(:any)/(:any)']['put'] = 'LlamadoConcursoRest/llamado_concurso/$1/$2';
+$route['apirest/llamadoConcurso/(:any)/(:any)']['delete'] = 'LlamadoConcursoRest/llamado_concurso/$1/$2';
 
 
 //******************************************************************************

@@ -70,6 +70,16 @@ class LlamadoConcursoDAO extends \CI_Model {
     }
   }
 
+  public function eliminar($rif, $numero_proceso) {
+    if ($this->buscar($rif, $numero_proceso)) {
+      $this->db->where("rif_organoente", $rif);
+      $this->db->where("numero_proceso", $numero_proceso);
+      return $this->db->delete(self::TB_NOMBRE);
+    } else {
+      throw new \Exception('El número proceso que intenta eliminar, ya no exciste');
+    }
+  }
+
   public function calcularLapsos($fechaLlamado, int $diasHabiles, array $feriados) {
     $fechaDisponibleLlamado = null;
     $fechaFinAclaratoria = null;

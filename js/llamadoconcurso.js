@@ -93,6 +93,35 @@ var LlamadoConcurso = {
 		let url = "apirest/llamadoConcurso/" + textoABuscar + "/" + x;
 		LlamadoConcurso.consultaAjax(url, propio);
 	},
+	dialogoConfirmarBorrar: function (rif, numero_proceso) {
+		if (rif !== undefined && numero_proceso !== undefined) {
+			$.get("frmConfirmarBorrar", function (html) {
+				$("#sncModalDlg").html(html);
+				$("#btnCerrarDialogoModal").click(function () {
+					$("#sncModalDlg").modal("hide");
+					$("#sncModalDlg").html("");
+				});
+				$.ajax({
+					url: "apirest/llamadoConcurso/" + rif + "/" + numero_proceso,
+					success: function (json) {
+						let llc = json.dato;
+						$("#descripcionDeAccion").html(
+							"Está a punto de eliminar el llamado a concurso"
+						);
+						$("#elementoAEliminar").html(
+							numero_proceso + ": " + llc.denominacion_proceso
+						);
+						$("#btnBorrar").click(function () {
+							LlamadoConcurso.eliminar(rif, numero_proceso);
+						});
+					},
+					error: function (error) {
+						sncApp.notificarError(error);
+					},
+				});
+			});
+		}
+	},
 	consultaAjax: function (url, propio) {
 		$.ajax({
 			url: url,
@@ -439,6 +468,23 @@ var LlamadoConcurso = {
 			estatus: llamadoConcurso.estatus,
 		};
 	},
+	eliminar: function (rif, numero_proceso) {
+		$.ajax({
+			url: "apirest/llamadoConcurso/" + rif + "/" + numero_proceso,
+			method: "DELETE",
+			success: function (json) {
+				alert(
+					"El llamado a concurso: " +
+						numero_proceso +
+						" ha sido eliminado satisfactoriamente"
+				);
+				location.href = "llamadoconcurso";
+			},
+			error: function (error) {
+				sncApp.notificarError(error);
+			},
+		});
+	},
 	editar: function () {
 		if (LlamadoConcurso.validarDatos()) {
 			let rif = $("#txtRif").val();
@@ -533,7 +579,12 @@ var LlamadoConcurso = {
 			llamadoConcurso.estatus === "Iniciado" && propio
 				? '<a href="editllamadoconcurso/' +
 				  llamadoConcurso.numero_proceso +
-				  '" class="btn btn-info">Editar Llamado</a> | \n\
+				  '"><button class="btn btn-info"> <i class="ion-edit"></i> Editar</button></a>\n\
+					<button class="btn btn-danger" data-toggle="modal" data-target="#sncModalDlg" onclick="LlamadoConcurso.dialogoConfirmarBorrar(\'' +
+				  llamadoConcurso.rif_organoente +
+				  "', '" +
+				  llamadoConcurso.numero_proceso +
+				  '\')"><i class="ion-trash-a"></i> Eliminar</button> | \n\
 		Estatus: ' +
 				  llamadoConcurso.estatus +
 				  "\n"
@@ -551,7 +602,7 @@ var LlamadoConcurso = {
 		let salida = "";
 		salida +=
 			'\n\
-<div class="card shadow-sm p-3 mb-3">\n\
+<div class="card shadow-sm p-3 mb-4">\n\
   <div class="card-header text-center bg-turquesa"> <i class="ion-ios-grid-view-outline"></i> Proceso: ' +
 			llamadoConcurso.numero_proceso +
 			' | <i class="ion-calendar"></i> Fecha de Llamado: ' +
