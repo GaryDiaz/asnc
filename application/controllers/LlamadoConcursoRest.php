@@ -173,6 +173,7 @@ class LlamadoConcursoRest extends RestController {
   }
 
   public function llamado_concurso_post() {
+    this->sesionIniciada();
     try {
       $llamadoConcurso = $this->_post_args;
       $llamadoConcurso['estatus'] = "Iniciado";
@@ -191,6 +192,7 @@ class LlamadoConcursoRest extends RestController {
   }
 
   public function llamado_concurso_put($rif, $numero_proceso) {
+    this->sesionIniciada();
     try {
       $llc = $this->_put_args;
       $this->load->model('dao/LlamadoConcursoDAO');
@@ -208,6 +210,7 @@ class LlamadoConcursoRest extends RestController {
   }
 
   public function llamado_concurso_delete($rif, $numero_proceso) {
+    this->sesionIniciada();
     try {
       $this->load->model('dao/LlamadoConcursoDAO');
       $rs = $this->LlamadoConcursoDAO->eliminar($rif, $numero_proceso);
