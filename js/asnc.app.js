@@ -62,32 +62,32 @@ function irArriba() {
 }
 
 /**
- * sncApp
+ * SncApp
  * Es el módulo que GESTIONA de manera general, las interfaces en el FRONT-END
  * @type type
  */
-var sncApp = {
+var SncApp = {
 	cargarDatosDePagina: function (uri) {
 		switch (uri) {
 			case "/diasferiados":
-				sncApp.inicializarGestionFeriados();
+				SncApp.inicializarGestionFeriados();
 				break;
 			case "/gestionlapsos":
-				sncApp.inicializarGestionLapsos();
+				SncApp.inicializarGestionLapsos();
 				break;
 			case "/perfilinstitucional":
-				sncApp.inicializarOrganoEntePropio();
+				SncApp.inicializarOrganoEntePropio();
 				break;
 			case "/llamadoconcurso":
-				sncApp.inicializarLlamadoConcurso();
+				SncApp.inicializarLlamadoConcurso();
 				break;
 			case "/regllamadoconcurso":
-				sncApp.inicializarRegistroLlamado();
+				SncApp.inicializarRegistroLlamado();
 				break;
 			default:
 				let aURI = uri.split("/");
 				if (aURI[1] === "editllamadoconcurso") {
-					sncApp.inicializarEditarLlamado(aURI[2]);
+					SncApp.inicializarEditarLlamado(aURI[2]);
 				}
 				break;
 		}
@@ -600,9 +600,9 @@ var sncApp = {
 				break;
 		}
 		if (json) {
-			sncApp.enviarNotificacion(json.descripcion, json.titulo, icon, true);
+			SncApp.enviarNotificacion(json.descripcion, json.titulo, icon, true);
 		} else {
-			sncApp.enviarNotificacion(error.responseText, "Error", icon);
+			SncApp.enviarNotificacion(error.responseText, "Error", icon);
 		}
 	},
 };

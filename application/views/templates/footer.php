@@ -59,18 +59,18 @@
 <script src="<?= base_url() ?>/js/asnc.app.js?<?= time() ?>"></script>
 
 <script>
-        $(document).ready(function() {
-                App.init();
-                TableManageDefault.init();
-                TableManageAutofill.init();
-                FormPlugins.init();
-                Gallery.init();
-                Highlight.init();
-                var ubiAct = window.location + "";
-                var arrayURL = ubiAct.split("index.php");
-                ubiAct = arrayURL[1];
-                sncApp.cargarDatosDePagina(ubiAct);
-        });
+  $(document).ready(function() {
+    App.init();
+    TableManageDefault.init();
+    TableManageAutofill.init();
+    FormPlugins.init();
+    Gallery.init();
+    Highlight.init();
+    var ubiAct = window.location + "";
+    var arrayURL = ubiAct.split("index.php");
+    ubiAct = arrayURL[1];
+    SncApp.cargarDatosDePagina(ubiAct);
+  });
 </script>
 <!-- <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

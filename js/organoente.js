@@ -179,7 +179,7 @@ var OrganoEnte = {
 				});
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -189,10 +189,10 @@ var OrganoEnte = {
 			method: "PUT",
 			data: organoEnteFrm,
 			success: function (json) {
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},

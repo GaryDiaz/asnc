@@ -17,10 +17,10 @@ var FeriadoEspecifico = {
 				FeriadoEspecifico.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -52,7 +52,7 @@ var FeriadoEspecifico = {
 				FeriadoEspecifico.mostrar(json);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -93,7 +93,7 @@ var FeriadoEspecifico = {
 						});
 					},
 					error: function (error) {
-						sncApp.notificarError(error);
+						SncApp.notificarError(error);
 					},
 				});
 			});
@@ -118,7 +118,7 @@ var FeriadoEspecifico = {
 				$("#txtDescripcion").val(fn.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -137,10 +137,10 @@ var FeriadoEspecifico = {
 				FeriadoEspecifico.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -152,10 +152,10 @@ var FeriadoEspecifico = {
 				FeriadoEspecifico.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -201,10 +201,10 @@ var FeriadoEspecifico = {
 			url: "apirest/feriadosEspecificos",
 			success: function (json) {
 				FeriadoEspecifico.mostrar(json);
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -213,10 +213,10 @@ var FeriadoEspecifico = {
 			url: "apirest/feriadosEspecificos/" + anio,
 			success: function (json) {
 				FeriadoEspecifico.mostrar(json);
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -276,10 +276,10 @@ var FeriadoEstadal = {
 				FeriadoEstadal.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -295,11 +295,11 @@ var FeriadoEstadal = {
 					FeriadoEstadal.mostrar(json);
 				},
 				error: function (error) {
-					sncApp.notificarError(error);
+					SncApp.notificarError(error);
 				},
 			});
 		} else {
-			sncApp.enviarNotificacion("Debe seleccionar un estado");
+			SncApp.enviarNotificacion("Debe seleccionar un estado");
 		}
 	},
 	cambioDescripcionForm: function () {
@@ -369,7 +369,7 @@ var FeriadoEstadal = {
 						});
 					},
 					error: function (error) {
-						sncApp.notificarError(error);
+						SncApp.notificarError(error);
 					},
 				});
 			});
@@ -414,7 +414,7 @@ var FeriadoEstadal = {
 				$("#txtDescripcion").val(fn.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -449,10 +449,10 @@ var FeriadoEstadal = {
 				FeriadoEstadal.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -464,10 +464,10 @@ var FeriadoEstadal = {
 				FeriadoEstadal.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -503,10 +503,10 @@ var FeriadoEstadal = {
 				url: "apirest/feriadosEstadales/" + idEstado,
 				success: function (json) {
 					FeriadoEstadal.mostrar(json);
-					sncApp.enviarNotificacion(json.descripcion);
+					SncApp.enviarNotificacion(json.descripcion);
 				},
 				error: function (error) {
-					sncApp.notificarError(error);
+					SncApp.notificarError(error);
 				},
 			});
 		}
@@ -579,10 +579,10 @@ var FeriadoNacional = {
 				FeriadoNacional.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -595,7 +595,7 @@ var FeriadoNacional = {
 				FeriadoNacional.mostrar(json);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -655,7 +655,7 @@ var FeriadoNacional = {
 						});
 					},
 					error: function (error) {
-						sncApp.notificarError(error);
+						SncApp.notificarError(error);
 					},
 				});
 			});
@@ -682,7 +682,7 @@ var FeriadoNacional = {
 				$("#txtDescripcion").val(fn.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -701,10 +701,10 @@ var FeriadoNacional = {
 				FeriadoNacional.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -716,10 +716,10 @@ var FeriadoNacional = {
 				FeriadoNacional.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -750,10 +750,10 @@ var FeriadoNacional = {
 			url: "apirest/feriadosNacionales",
 			success: function (json) {
 				FeriadoNacional.mostrar(json);
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -814,10 +814,10 @@ var FeriadoMunicipal = {
 				FeriadoMunicipal.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -833,11 +833,11 @@ var FeriadoMunicipal = {
 					FeriadoMunicipal.mostrar(json);
 				},
 				error: function (error) {
-					sncApp.notificarError(error);
+					SncApp.notificarError(error);
 				},
 			});
 		} else {
-			sncApp.enviarNotificacion("Debe seleccionar un municipio");
+			SncApp.enviarNotificacion("Debe seleccionar un municipio");
 		}
 	},
 	cambioDescripcionForm: function () {
@@ -945,7 +945,7 @@ var FeriadoMunicipal = {
 						});
 					},
 					error: function (error) {
-						sncApp.notificarError(error);
+						SncApp.notificarError(error);
 					},
 				});
 			});
@@ -1024,10 +1024,10 @@ var FeriadoMunicipal = {
 				FeriadoMunicipal.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -1039,10 +1039,10 @@ var FeriadoMunicipal = {
 				FeriadoMunicipal.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -1082,10 +1082,10 @@ var FeriadoMunicipal = {
 				url: "apirest/feriadosMunicipales/" + idMunicipio,
 				success: function (json) {
 					FeriadoMunicipal.mostrar(json);
-					sncApp.enviarNotificacion(json.descripcion);
+					SncApp.enviarNotificacion(json.descripcion);
 				},
 				error: function (error) {
-					sncApp.notificarError(error);
+					SncApp.notificarError(error);
 				},
 			});
 		}

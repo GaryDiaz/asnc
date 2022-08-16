@@ -43,13 +43,13 @@ var LlamadoConcurso = {
 				data: llamadoConcursoFrm,
 				success: function (json) {
 					alert(json.descripcion);
-					sncApp.enviarNotificacion(json.descripcion);
+					SncApp.enviarNotificacion(json.descripcion);
 					let salida = LlamadoConcurso.mostrarLlamado(json.dato);
 					$("#areaLlamadoConcurso").html(salida);
 					history.pushState(null, "", "llamadoconcurso");
 				},
 				error: function (error) {
-					sncApp.notificarError(error);
+					SncApp.notificarError(error);
 				},
 			});
 		} else {
@@ -67,7 +67,7 @@ var LlamadoConcurso = {
 			},
 			error: function (error) {
 				$("#resultadosLlamadoConcurso").html("No hay resultados para mostrar");
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -116,7 +116,7 @@ var LlamadoConcurso = {
 						});
 					},
 					error: function (error) {
-						sncApp.notificarError(error);
+						SncApp.notificarError(error);
 					},
 				});
 			});
@@ -128,11 +128,11 @@ var LlamadoConcurso = {
 			method: "GET",
 			success: function (json) {
 				LlamadoConcurso.mostrarTodos(json.datos, propio);
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
 				$("#resultadosLlamadoConcurso").html("No hay resultados para mostrar");
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -481,7 +481,7 @@ var LlamadoConcurso = {
 				location.href = "llamadoconcurso";
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -494,13 +494,13 @@ var LlamadoConcurso = {
 				method: "PUT",
 				data: llamadoConcursoFrm,
 				success: function (json) {
-					sncApp.enviarNotificacion(json.descripcion);
+					SncApp.enviarNotificacion(json.descripcion);
 					let salida = LlamadoConcurso.mostrarLlamado(json.dato);
 					$("#areaLlamadoConcurso").html(salida);
 					history.pushState(null, "", "../llamadoconcurso");
 				},
 				error: function (error) {
-					sncApp.notificarError(error);
+					SncApp.notificarError(error);
 				},
 			});
 		} else {

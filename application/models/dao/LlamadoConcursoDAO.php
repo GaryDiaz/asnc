@@ -17,6 +17,7 @@ class LlamadoConcursoDAO extends \CI_Model {
   }
 
   public function buscarTodos() {
+    $this->db->order_by("fecha_llamado", "DESC");
     $query = $this->db->get(self::VW_NOMBRE);
     return $query->result();
   }

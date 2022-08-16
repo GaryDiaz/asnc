@@ -30,10 +30,10 @@ var Lapso = {
 				Lapso.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -132,7 +132,7 @@ var Lapso = {
 						});
 					},
 					error: function (error) {
-						sncApp.notificarError(error);
+						SncApp.notificarError(error);
 					},
 				});
 			});
@@ -226,10 +226,10 @@ var Lapso = {
 				Lapso.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -242,10 +242,10 @@ var Lapso = {
 				Lapso.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -287,10 +287,10 @@ var Lapso = {
 			url: "apirest/lapsos",
 			success: function (json) {
 				Lapso.mostrar(json);
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -405,10 +405,10 @@ var Mecanismo = {
 				Mecanismo.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -442,7 +442,7 @@ var Mecanismo = {
 						});
 					},
 					error: function (error) {
-						sncApp.notificarError(error);
+						SncApp.notificarError(error);
 					},
 				});
 			});
@@ -478,10 +478,10 @@ var Mecanismo = {
 				Mecanismo.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -493,10 +493,10 @@ var Mecanismo = {
 				Mecanismo.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -525,10 +525,10 @@ var Mecanismo = {
 			url: "apirest/mecanismos",
 			success: function (json) {
 				Mecanismo.mostrar(json);
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -580,10 +580,10 @@ var Modalidad = {
 				Modalidad.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -617,7 +617,7 @@ var Modalidad = {
 						});
 					},
 					error: function (error) {
-						sncApp.notificarError(error);
+						SncApp.notificarError(error);
 					},
 				});
 			});
@@ -653,10 +653,10 @@ var Modalidad = {
 				Modalidad.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -668,10 +668,10 @@ var Modalidad = {
 				Modalidad.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -700,10 +700,10 @@ var Modalidad = {
 			url: "apirest/modalidades",
 			success: function (json) {
 				Modalidad.mostrar(json);
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -755,10 +755,10 @@ var ObjetoContratacion = {
 				ObjetoContratacion.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -792,7 +792,7 @@ var ObjetoContratacion = {
 						});
 					},
 					error: function (error) {
-						sncApp.notificarError(error);
+						SncApp.notificarError(error);
 					},
 				});
 			});
@@ -828,10 +828,10 @@ var ObjetoContratacion = {
 				ObjetoContratacion.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -843,10 +843,10 @@ var ObjetoContratacion = {
 				ObjetoContratacion.mostrar(json);
 				$("#sncModalDlg").modal("hide");
 				$("#sncModalDlg").html("");
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
@@ -875,10 +875,10 @@ var ObjetoContratacion = {
 			url: "apirest/objetoscont",
 			success: function (json) {
 				ObjetoContratacion.mostrar(json);
-				sncApp.enviarNotificacion(json.descripcion);
+				SncApp.enviarNotificacion(json.descripcion);
 			},
 			error: function (error) {
-				sncApp.notificarError(error);
+				SncApp.notificarError(error);
 			},
 		});
 	},
