@@ -578,6 +578,9 @@ var SncApp = {
 		$("#txtLugarEntrega").change(function () {
 			LlamadoConcurso.cambioLugarEntrega();
 		});
+		$("#txtObservaciones").change(function () {
+			LlamadoConcurso.cambioObservaciones();
+		});
 		$("#btnGuardar").click(function () {
 			LlamadoConcurso.agregar();
 		});

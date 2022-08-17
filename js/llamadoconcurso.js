@@ -626,10 +626,9 @@ var LlamadoConcurso = {
 			</div>\n\
 			<div class="col-sm-8 col-md-8 col-lg-9 col-xl-10"><div class="font-weight-bold text-vinotinto">Descripción de Contratación: </div>' +
 			llamadoConcurso.descripcion_contratacion +
-			"\n\
-			</div>\n" +
-			observaciones +
-			'</div>\n\
+			'\n\
+			</div>\n\
+		</div>\n\
   </div>\n\
 	<div class="card-body">\n\
     <h5 class="card-title text-center bg-dark text-light">DATOS DEL ÓRGANO O ENTE</h5>\n\
@@ -742,8 +741,10 @@ var LlamadoConcurso = {
 			" (" +
 			llamadoConcurso.estado_sobre +
 			")" +
-			'\n\
-			</div>\n\
+			"\n\
+			</div>\n" +
+			observaciones +
+			'\
 		</div>\n\
   </div>\n\
 	<div class="card-footer text-center bg-turquesa">\n\
