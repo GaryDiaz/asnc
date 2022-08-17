@@ -93,6 +93,11 @@ var LlamadoConcurso = {
 		let url = "apirest/llamadoConcurso/" + textoABuscar + "/" + x;
 		LlamadoConcurso.consultaAjax(url, propio);
 	},
+	buscarPorObjetoContratacion: function (id, propio) {
+		let x = propio ? 1 : 0;
+		let url = "apirest/llamadoConcursoOC/" + id + "/" + x;
+		LlamadoConcurso.consultaAjax(url, propio);
+	},
 	dialogoConfirmarBorrar: function (rif, numero_proceso) {
 		if (rif !== undefined && numero_proceso !== undefined) {
 			$.get("frmConfirmarBorrar", function (html) {
@@ -176,6 +181,7 @@ var LlamadoConcurso = {
 				$("#camposIdentificadores").hide();
 				$("#camposFechas").hide();
 				$("#camposTextos").hide();
+				$("#camposObjetoContratacion").hide();
 				break;
 			case "opcNumeroProceso":
 				$("#chkPropio").prop("disabled", true);
@@ -185,6 +191,7 @@ var LlamadoConcurso = {
 				$("#camposIdentificadores").show();
 				$("#camposFechas").hide();
 				$("#camposTextos").hide();
+				$("#camposObjetoContratacion").hide();
 				break;
 			case "opcFechaLlamado":
 			case "opcFechaFin":
@@ -195,6 +202,7 @@ var LlamadoConcurso = {
 				$("#camposIdentificadores").hide();
 				$("#camposFechas").show();
 				$("#camposTextos").hide();
+				$("#camposObjetoContratacion").hide();
 				break;
 			case "opcTexto":
 				$("#txtTextoABuscar").val("");
@@ -202,6 +210,15 @@ var LlamadoConcurso = {
 				$("#camposIdentificadores").hide();
 				$("#camposFechas").hide();
 				$("#camposTextos").show();
+				$("#camposObjetoContratacion").hide();
+				break;
+			case "opcObjetoContratacion":
+				$("#camposIdentificadores").hide();
+				$("#camposFechas").hide();
+				$("#camposTextos").hide();
+				$("#camposObjetoContratacion").show();
+				break;
+			case "opcOrganoEnte":
 				break;
 		}
 	},
@@ -564,6 +581,16 @@ var LlamadoConcurso = {
 					LlamadoConcurso.buscarPorTexto(texto, propio);
 				} else {
 					$("#errTextoABuscar").html("El campo no puede estar vacío");
+				}
+				break;
+			case "opcObjetoContratacion":
+				let id = $("#sltObjetoContratacion").val();
+				if (id !== "") {
+					LlamadoConcurso.buscarPorObjetoContratacion(id, propio);
+				} else {
+					$("#errObjetoContratacion").html(
+						"Debe seleccionar una opción válida"
+					);
 				}
 				break;
 		}

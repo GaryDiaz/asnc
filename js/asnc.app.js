@@ -206,6 +206,21 @@ var SncApp = {
 		$("#sltTipoFiltro").change(function () {
 			LlamadoConcurso.cambioSltTipoFiltro();
 		});
+		$.ajax({
+			url: "apirest/objetoscont",
+			success: function (json) {
+				let salida = "<option>[Objeto de Contratación]</option>\n";
+				$.each(json.datos, function (i, oc) {
+					salida +=
+						"<option value=" +
+						oc.id_objeto_contratacion +
+						">" +
+						oc.descripcion +
+						"</option>\n";
+				});
+				$("#sltObjetoContratacion").html(salida);
+			},
+		});
 		LlamadoConcurso.listar();
 		$("#btnFiltrarLlamados").click(function () {
 			LlamadoConcurso.filtrar();

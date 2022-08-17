@@ -40,6 +40,8 @@
 								<option value="opcFechaLlamado">Fecha de Llamado</option>
 								<option value="opcFechaFin">Fecha Fin (Entrega)</option>
 								<option value="opcTexto">Texto a buscar</option>
+								<option value="opcObjetoContratacion">Objeto de Contratación</option>
+								<option value="opcOrganoEnte">Órgano o Ente</option>
 							</select>
 						</div>
 					</div>
@@ -69,6 +71,15 @@
 							<label for="txtTextoABuscar"><i class="ion-document-text"></i> Texto a buscar</label>
 							<input type="text" class="form-control" placeholder="Texto a buscar" id="txtTextoABuscar" />
 							<small id="errTextoABuscar" class="form-text text-danger"></small>
+						</div>
+					</div>
+					<div class="p-2 flex-fill bd-highlight" id="camposObjetoContratacion">
+						<div class="form-group">
+							<label for="sltObjetoContratacion">Objeto de Contratacion</label>
+							<select id="sltObjetoContratacion" class="form-control">
+								<option>Objeto de Contratacion</option>
+							</select>
+							<small id="errObjetoContratacion" class="form-text text-muted text-red-darker"></small>
 						</div>
 					</div>
 					<?php if ($this->session->userdata('session')) { ?>

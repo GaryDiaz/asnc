@@ -46,6 +46,7 @@ $route['apirest/llamadoConcurso/(:any)']['get'] = 'LlamadoConcursoRest/buscar_po
 $route['apirest/llamadoConcurso/(:any)/(:num)']['get'] = 'LlamadoConcursoRest/buscar_por_texto/$1/$2';
 $route['apirest/llamadoConcurso/(:any)/(:any)']['get'] = 'LlamadoConcursoRest/buscar_por_rif_y_numero_proceso/$1/$2';
 $route['apirest/llamadoConcurso/(:any)/(:any)/(:any)/(:num)']['get'] = 'LlamadoConcursoRest/buscar_por_fecha/$1/$2/$3/$4';
+$route['apirest/llamadoConcursoOC/(:num)/(:num)']['get'] = 'LlamadoConcursoRest/buscar_por_objeto_contratacion/$1/$2';
 $route['apirest/llamadoConcurso']['post'] = 'LlamadoConcursoRest/llamado_concurso';
 $route['apirest/llamadoConcurso/(:any)/(:any)']['put'] = 'LlamadoConcursoRest/llamado_concurso/$1/$2';
 $route['apirest/llamadoConcurso/(:any)/(:any)']['delete'] = 'LlamadoConcursoRest/llamado_concurso/$1/$2';
