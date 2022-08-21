@@ -14,8 +14,6 @@ require_once APPPATH . "/models/Mensaje.php";
 
 /**
  * LlamadoConcursoRest
- * &&
- * @author Gary Díaz
  */
 class LlamadoConcursoRest extends RestController {
 	private function sesionIniciada() {
@@ -218,6 +216,7 @@ class LlamadoConcursoRest extends RestController {
 		}
 	}
 
+	/*
 	public function llamado_concurso_delete($rif, $numero_proceso) {
 		$this->sesionIniciada();
 		try {
@@ -233,6 +232,7 @@ class LlamadoConcursoRest extends RestController {
 			$this->response(new Mensaje($exc->getMessage()), RestController::HTTP_BAD_REQUEST);
 		}
 	}
+	*/
 
 	private function buscarOrganoEntePorRif($rif) {
 		try {

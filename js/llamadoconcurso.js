@@ -295,9 +295,9 @@ var LlamadoConcurso = {
 		}
 	},
 	cambioDenominacionProceso: function () {
-		llamadoConcursoFrm.denominacion_proceso = $(
-			"#txtDenominacionProceso"
-		).val();
+		llamadoConcursoFrm.denominacion_proceso = $("#txtDenominacionProceso")
+			.val()
+			.toUpperCase();
 		if ($("#txtDenominacionProceso").val() !== "") {
 			$("#errDenominacionProceso").html("");
 		}
@@ -305,7 +305,9 @@ var LlamadoConcurso = {
 	cambioDescripcionContratacion: function () {
 		llamadoConcursoFrm.descripcion_contratacion = $(
 			"#txtDescripcionContratacion"
-		).val();
+		)
+			.val()
+			.toUpperCase();
 		if ($("#txtDescripcionContratacion").val() !== "") {
 			$("#errDescripcionContratacion").html("");
 		}
@@ -391,7 +393,9 @@ var LlamadoConcurso = {
 		}
 	},
 	cambioObservaciones: function () {
-		llamadoConcursoFrm.observaciones = $("#txtObservaciones").val();
+		llamadoConcursoFrm.observaciones = $("#txtObservaciones")
+			.val()
+			.toUpperCase();
 		if ($("#txtObservaciones").val() !== "") {
 			$("#errObservaciones").html("");
 		}
@@ -607,11 +611,7 @@ var LlamadoConcurso = {
 				? '<a href="editllamadoconcurso/' +
 				  llamadoConcurso.numero_proceso +
 				  '"><button class="btn btn-info"> <i class="ion-edit"></i> Editar</button></a>\n\
-					<button class="btn btn-danger" data-toggle="modal" data-target="#sncModalDlg" onclick="LlamadoConcurso.dialogoConfirmarBorrar(\'' +
-				  llamadoConcurso.rif_organoente +
-				  "', '" +
-				  llamadoConcurso.numero_proceso +
-				  '\')"><i class="ion-trash-a"></i> Eliminar</button> | \n\
+					| \n\
 		Estatus: ' +
 				  llamadoConcurso.estatus +
 				  "\n"
